@@ -1,12 +1,1071 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muhammad Rayan Fahrezy — Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhammad Rayan Fahrezy — Creative HR &amp; Organizational Comm. Scrapbook Portfolio</title>
 </head>
-<body>
-  <div id="app"></div>
+<body class="min-h-screen relative selection:bg-[#F5E216] selection:text-[#5C3A21]">
+  <!-- =================================================================== -->
+  <!-- CUTTING MAT PRECISION RULER TOP & SIDE MARKINGS                     -->
+  <!-- =================================================================== -->
+  <div class="fixed top-0 left-0 right-0 h-6 bg-[#2A5537]/90 backdrop-blur-xs border-b border-white/30 z-40 flex items-center justify-between px-16 font-mono text-[10px] text-white/75 select-none pointer-events-none ruler-top">
+    <span>00 cm // MAT-A1 SELF-HEALING SURFACE</span>
+    <span class="hidden sm:inline">10 cm</span>
+    <span class="hidden md:inline">20 cm — FKS TELKOM UNIVERSITY</span>
+    <span class="hidden lg:inline">30 cm — HR &amp; ORG. COMM STUDIO</span>
+    <span id="live-grid-coords">GRID X:048 Y:048</span>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- FLOATING OVERLAY CONTROLS (SPECIFICATION SECTION 3)                 -->
+  <!-- 1. Top-Left Back / Studio Index Squircle (48x48px, #FFFFFF, 16px)   -->
+  <!-- 2. Bottom-Right Zoom Pill (rgba(255,255,255,0.78), blur(8px), 1000) -->
+  <!-- =================================================================== -->
+  <div class="fixed top-9 left-4 sm:left-6 z-50 flex items-center gap-2.5">
+    <button
+      id="floating-back-btn"
+      onclick="toggleQuickJumpMenu()"
+      title="Studio Desk Navigation & Reset Collage"
+      aria-label="Navigasi Meja Kerja & Reset Kolase"
+      style="width: 48px; height: 48px; background: #FFFFFF; border-radius: 16px; box-shadow: var(--shadow-object);"
+      class="flex items-center justify-center text-[#111827] hover:scale-105 active:scale-95 transition cursor-pointer"
+    >
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+    </button>
+
+    <!-- Quick Jump Popover Menu -->
+    <div id="quick-jump-menu" class="hidden paper-cutout-white p-2.5 shadow-2xl border-2 border-[#4A2E1B] font-mono text-xs space-y-1 min-w-[215px]">
+      <div class="px-2 py-1 bg-[#5C3A21] text-white font-bold flex items-center justify-between">
+        <span>STUDIO DESK MAP</span>
+        <span class="text-[#F5E216]">A1</span>
+      </div>
+      <a href="#collage-hero" onclick="toggleQuickJumpMenu()" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">Hero Collage &amp; Play</a>
+      <a href="#profil-karir" onclick="toggleQuickJumpMenu()" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">01. Ringkasan &amp; Tujuan HR</a>
+      <a href="#pengalaman-zine" onclick="toggleQuickJumpMenu()" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">02. 6 Rekam Jejak (2021–2027)</a>
+      <a href="#pendidikan-ket" onclick="toggleQuickJumpMenu()" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">03–04. Pendidikan &amp; Skills</a>
+      <a href="#kontak-desk" onclick="toggleQuickJumpMenu()" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">Kontak</a>
+      <div class="pt-1 border-t border-[#5C3A21]/20">
+        <button onclick="resetDraggablePositions(); toggleQuickJumpMenu();" class="w-full text-left px-2.5 py-1.5 bg-[#F5E216] text-[#5C3A21] font-bold hover:brightness-95 cursor-pointer">
+          ↺ Rapikan Potongan Kertas
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom-Right Zoom Pill -->
+  <div class="fixed bottom-5 right-4 sm:right-6 z-50 flex items-center gap-2">
+    <button
+      id="zoom-pill-btn"
+      onclick="cycleCanvasZoom()"
+      title="Klik untuk mengubah skala meja kerja (900 / 1000 / 1080)"
+      style="background: rgba(255, 255, 255, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 9999px; box-shadow: var(--shadow-paper);"
+      class="px-4 py-2 flex items-center gap-2 text-[#111827] font-mono text-xs font-bold hover:bg-white transition cursor-pointer border border-white/60"
+    >
+      <svg class="w-3.5 h-3.5 text-[#5C3A21]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <polyline points="9 21 3 21 3 15"></polyline>
+        <line x1="21" y1="3" x2="14" y2="10"></line>
+        <line x1="3" y1="21" x2="10" y2="14"></line>
+      </svg>
+      <span id="zoom-counter-value" class="tabular-nums">1000</span>
+    </button>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- DECORATIVE STUDIO DESK SVG CABLES (EARPHONE WIRE ACROSS MAT)        -->
+  <!-- =================================================================== -->
+  <!-- Three.js layer: paper trimmings drifting over the mat -->
+  <canvas id="mat-3d" class="fixed inset-0 w-full h-full pointer-events-none z-0" style="opacity:.5" aria-hidden="true"></canvas>
+
+  <svg class="hidden xl:block overflow-visible absolute top-16 left-0 w-[360px] h-[520px] pointer-events-none z-0 opacity-80" viewBox="0 0 360 520" fill="none" aria-hidden="true">
+    <defs>
+      <filter id="cable-shadow" x="-10%" y="-10%" width="130%" height="130%">
+        <feDropShadow dx="2" dy="8" stdDeviation="5" flood-color="#0A1A0E" flood-opacity="0.55" />
+      </filter>
+    </defs>
+    <path d="M -40,60 C 120,90 150,-30 290,20 C 410,65 320,270 140,350" stroke="#FAFAFA" stroke-width="4.5" stroke-linecap="round" filter="url(#cable-shadow)" />
+  </svg>
+  <svg class="hidden xl:block overflow-visible absolute top-[640px] right-0 w-[360px] h-[560px] pointer-events-none z-0 opacity-80" viewBox="0 0 360 560" fill="none" aria-hidden="true">
+    <path d="M 400,0 C 240,60 300,220 170,300 C 60,370 130,500 -20,560" stroke="#E4E6E9" stroke-width="4" stroke-linecap="round" filter="url(#cable-shadow)" />
+  </svg>
+
+  <!-- =================================================================== -->
+  <!-- MAIN DESKTOP INTERACTIVE CANVAS (Max-Width 1200px / Mobile 480px)   -->
+  <!-- =================================================================== -->
+  <main id="studio-canvas" class="relative z-10 max-w-[480px] md:max-w-[1200px] mx-auto px-4 sm:px-8 pt-10 pb-28 transition-transform duration-300 origin-top">
+
+    <!-- ================================================================= -->
+    <!-- PHYSICAL STUDIO OBJECT 1: TOP MECHANICAL KEYBOARD NAV DOCK        -->
+    <!-- ================================================================= -->
+    <div class="mb-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+      <!-- Mechanical Keyboard Strip (#E4E6E9 Frame + Tactile Keycaps) -->
+      <div class="mech-frame p-2.5 rounded-xl inline-flex flex-wrap items-center gap-1.5 sm:gap-2 transform -rotate-1">
+        <div class="px-2 py-1 font-mono text-[10px] font-bold text-[#5C3A21] flex items-center gap-1.5 border-r border-[#5C3A21]/20 mr-1">
+          <span class="w-2 h-2 rounded-full bg-[#EE1D24] animate-pulse"></span>
+          <span>MRF-65% STUDIO KBD</span>
+        </div>
+
+        <a href="#collage-hero" onclick="playKeyClick()" class="mech-key bg-[#5C3A21] text-white font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
+          <span class="text-[#F5E216] text-[10px]">ESC</span>
+          <span>HERO</span>
+        </a>
+        <a href="#profil-karir" onclick="playKeyClick()" class="mech-key bg-[#FAFAFA] text-[#5C3A21] font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
+          <span class="opacity-60 text-[10px]">F1</span>
+          <span>PROFIL &amp; HR</span>
+        </a>
+        <a href="#pengalaman-zine" onclick="playKeyClick()" class="mech-key bg-[#F5E216] text-[#5C3A21] font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
+          <span class="opacity-70 text-[10px]">F2</span>
+          <span>6 PENGALAMAN</span>
+        </a>
+        <a href="#olaf-card" onclick="playKeyClick()" class="mech-key bg-[#FAFAFA] text-[#5C3A21] font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
+          <span class="opacity-60 text-[10px]">F3</span>
+          <span>OLAF 2026</span>
+        </a>
+        <a href="#pendidikan-ket" onclick="playKeyClick()" class="mech-key bg-[#FAFAFA] text-[#5C3A21] font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
+          <span class="opacity-60 text-[10px]">F4</span>
+          <span>PENDIDIKAN</span>
+        </a>
+        <a href="#kontak-desk" onclick="playKeyClick()" class="mech-key bg-[#EE1D24] text-white font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
+          <span class="text-[#F5E216] text-[10px]">ENT</span>
+          <span>KONTAK</span>
+        </a>
+      </div>
+
+      <!-- Right Studio Desk Status & Audio/Crop-Mark Helper -->
+      <div class="flex items-center gap-3">
+        <span class="font-mono text-[11px] bg-[#5C3A21] text-[#FFFFFF] px-3 py-1.5 shadow-md transform rotate-1">
+          GESER STIKER &amp; KERTAS DI ATAS ALAS POTONG ✂️
+        </span>
+        <button
+          onclick="resetDraggablePositions()"
+          class="paper-cutout-yellow px-3 py-1.5 font-mono text-xs font-bold hover:brightness-105 active:translate-y-0.5 transition cursor-pointer transform -rotate-2"
+        >
+          ↺ Reset Meja
+        </button>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- SECTION 1: CENTRAL CUTTING-MAT COLLAGE CLUSTER (HERO)             -->
+    <!-- Implements Exact Component Specifications from design.md          -->
+    <!-- ================================================================= -->
+    <section id="collage-hero" class="relative py-6 sm:py-10">
+
+      <!-- Dashed Cutting Guide Frame Around Central Collage -->
+      <div class="crop-mark-box relative p-5 sm:p-10 md:p-14 rounded-none">
+
+        <!-- Corner Crop-Mark Crosshairs -->
+        <div class="absolute -top-3 -left-3 w-6 h-6 border-t-2 border-l-2 border-white/80 pointer-events-none"></div>
+        <div class="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-white/80 pointer-events-none"></div>
+        <div class="absolute -bottom-3 -left-3 w-6 h-6 border-b-2 border-l-2 border-white/80 pointer-events-none"></div>
+        <div class="absolute -bottom-3 -right-3 w-6 h-6 border-b-2 border-r-2 border-white/80 pointer-events-none"></div>
+
+        <!-- Top Metadata Coordinate Strip inside Cutting Zone -->
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-8 font-mono text-xs text-white/90">
+          <div class="flex items-center gap-2">
+            <span class="inline-block w-2.5 h-2.5 bg-[#F5E216]"></span>
+            <span>CUT-ZONE // A1-01: MUHAMMAD RAYAN FAHREZY (CV 2026)</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <button
+              onclick="toggleHeadlineCopy()"
+              class="px-2.5 py-1 bg-white/15 hover:bg-white/25 border border-white/40 text-[11px] font-mono rounded-xs cursor-pointer transition"
+              title="Ganti teks potongan kertas antara tema Creative Watchlist dan Human Resources"
+            >
+              ⇄ Mode Teks: <span id="headline-mode-label" class="text-[#F5E216] font-bold">HR + Creative Collage</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- MAIN 12-COLUMN SCRAPBOOK COLLAGE CLUSTER -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative">
+
+          <!-- LEFT / CENTER COLLAGE CLUSTER (7 COLS): Paper Cutouts + Retro Controls + Toggle + Play Badge -->
+          <div class="lg:col-span-7 relative flex flex-col items-center lg:items-start py-4">
+
+            <!-- Top Row: Retro Window Control Trio + Tactile 3D Toggle Switch -->
+            <div class="flex items-center gap-6 mb-4 z-20">
+              <!-- Retro Window Control Trio (Minimize, Maximize, Close) -->
+              <!-- 3 boxes 24x24px, #F5E216, border 1.5px solid #4A2E1B, staggered rotations (-6deg, -4deg, -8deg) -->
+              <div class="inline-flex items-center gap-2" title="Retro Window Controls (Klik untuk mengatur tampilan kolase)">
+                <button
+                  onclick="retroControlAction('minimize')"
+                  class="retro-control-box"
+                  style="transform: rotate(-6deg);"
+                  aria-label="Minimize Collage"
+                >
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none" stroke="#4A2E1B" stroke-width="2">
+                    <line x1="3" y1="12" x2="13" y2="12" />
+                  </svg>
+                </button>
+                <button
+                  onclick="retroControlAction('maximize')"
+                  class="retro-control-box"
+                  style="transform: rotate(-4deg);"
+                  aria-label="Maximize Collage"
+                >
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none" stroke="#4A2E1B" stroke-width="2">
+                    <rect x="3" y="3" width="10" height="10" />
+                  </svg>
+                </button>
+                <button
+                  onclick="retroControlAction('close')"
+                  class="retro-control-box"
+                  style="transform: rotate(-8deg);"
+                  aria-label="Shuffle Collage"
+                >
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none" stroke="#4A2E1B" stroke-width="2">
+                    <line x1="3.5" y1="3.5" x2="12.5" y2="12.5" />
+                    <line x1="12.5" y1="3.5" x2="3.5" y2="12.5" />
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Creator Handle Ribbon (@mrfahrezy18) -->
+              <!-- Background #F5E216, text #5C3A21, font-weight 700, 14px, padding 3px 10px, rotation 0deg -->
+              <a
+                href="mailto:mrfahrezy18@gmail.com"
+                style="background: #F5E216; color: #5C3A21; font-weight: 700; font-size: 14px; padding: 3px 10px; transform: rotate(0deg); box-shadow: var(--shadow-paper);"
+                class="font-mono inline-flex items-center gap-1.5 hover:scale-105 transition"
+              >
+                <span>@mrfahrezy18</span>
+              </a>
+
+              <!-- Tactile 3D Toggle Switch (76x42px, #D5D8DC, +12deg rotation) -->
+              <div class="flex items-center gap-2">
+                <div
+                  id="hero-tactile-switch"
+                  onclick="toggleXrayDeskMode()"
+                  style="transform: rotate(12deg);"
+                  class="tactile-switch-track"
+                  role="switch"
+                  aria-checked="false"
+                  title="Tactile 3D Switch: Aktifkan Crop-Mark X-Ray & Audio Klik"
+                >
+                  <div class="tactile-switch-thumb"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PAPER CUTOUT HEADLINE BLOCKS CLUSTER (Overlapping negative margins -8px to -16px) -->
+            <div class="relative flex flex-col items-center lg:items-start select-none my-2">
+
+              <!-- VARIANT BROWN ("Creative" / "Human"): #5C3A21, text #FFFFFF, padding 14px 28px, rotation -10deg + 3 small yellow stars -->
+              <div
+                id="cutout-block-1"
+                style="padding: 14px 28px; transform: rotate(-10deg);"
+                class="paper-cutout-brown heading-cutout text-5xl sm:text-7xl md:text-[78px] relative z-20 draggable-cutout"
+              >
+                <span id="cutout-text-1">Creative</span>
+
+                <!-- 3 Small Yellow Stars (#F5E216) at Top-Right Corner as required by design.md -->
+                <svg class="w-5 h-5 text-[#F5E216] absolute -top-3 -right-3 drop-shadow" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l2.6 6.6L21 11l-6.4 2.4L12 20l-2.6-6.6L3 11l6.4-2.4L12 2z"/>
+                </svg>
+                <svg class="w-4 h-4 text-[#F5E216] absolute top-2 -right-6 drop-shadow" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l2.6 6.6L21 11l-6.4 2.4L12 20l-2.6-6.6L3 11l6.4-2.4L12 2z"/>
+                </svg>
+                <svg class="w-3.5 h-3.5 text-[#F5E216] absolute -top-5 right-4 drop-shadow" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l2.6 6.6L21 11l-6.4 2.4L12 20l-2.6-6.6L3 11l6.4-2.4L12 2z"/>
+                </svg>
+              </div>
+
+              <!-- Middle Row: VARIANT YELLOW ("block" / "Resources") + YOUTUBE GLOSSY PLAY BADGE -->
+              <div class="flex flex-wrap items-center gap-4 -mt-3 sm:-mt-4 ml-4 sm:ml-10 z-30">
+                <!-- Variant Yellow ("block"): #F5E216, text #5C3A21, padding 12px 26px, rotation 0deg, dashed cut line at bottom-left corner -->
+                <div
+                  id="cutout-block-2"
+                  style="padding: 12px 26px; transform: rotate(0deg);"
+                  class="paper-cutout-yellow heading-cutout text-5xl sm:text-7xl md:text-[74px] relative draggable-cutout"
+                >
+                  <span id="cutout-text-2">HR block</span>
+                  <!-- Dashed Cut Line at Bottom-Left Corner (design.md spec) -->
+                  <div class="absolute bottom-1.5 left-1.5 w-12 h-4 border-b-2 border-l-2 border-dashed border-[#5C3A21]/75 pointer-events-none"></div>
+                  <!-- Scissor Icon on Dashed Line -->
+                  <span class="absolute -bottom-2.5 left-3 font-mono text-[10px] font-bold text-[#5C3A21]">✂</span>
+                </div>
+
+                <!-- YouTube Glossy Play Badge (88x62px, #EE1D24, radius 16px, rotation +6deg) -->
+                <button
+                  onclick="openWatchlistModal('olaf')"
+                  style="transform: rotate(6deg);"
+                  class="yt-glossy-badge group"
+                  title="Putar Studi Kasus Kepemimpinan OLAF 2026 (49 Panitia Lintas 7 Divisi)"
+                  aria-label="Buka Video Case Study OLAF 2026"
+                >
+                  <svg class="w-8 h-8 text-white ml-1 drop-shadow group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Bottom Row: VARIANT WHITE ("watchlist" / "portfolio"): #FAFAFA, text #5C3A21, padding 12px 28px, rotation +4deg -->
+              <div
+                id="cutout-block-3"
+                style="padding: 12px 28px; transform: rotate(4deg);"
+                class="paper-cutout-white heading-cutout text-5xl sm:text-7xl md:text-[76px] -mt-3 sm:-mt-4 ml-2 sm:ml-6 z-20 relative draggable-cutout"
+              >
+                <span id="cutout-text-3">watchlist</span>
+                <!-- Hand-drawn Cursor Arrow Highlight (#F5E216) -->
+                <svg class="w-8 h-8 absolute -bottom-5 -right-5 drop-shadow-md" viewBox="0 0 24 24" fill="#F5E216" stroke="#4A2E1B" stroke-width="2">
+                  <path d="M4 4l7.07 17 2.51-7.39L21 11.07z"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- NAME & SUBTITLE PAPER STRIPS (Authentic CV Identity) -->
+            <div class="mt-6 flex flex-wrap items-center gap-2.5 z-20">
+              <div class="paper-cutout-brown px-4 py-2 font-extrabold text-lg sm:text-2xl tracking-tight transform -rotate-1">
+                MUHAMMAD RAYAN FAHREZY
+              </div>
+              <div class="paper-cutout-yellow px-3.5 py-1.5 font-mono text-xs sm:text-sm font-bold transform rotate-2">
+                S1 Ilmu Komunikasi — Universitas Telkom
+              </div>
+              <div class="paper-cutout-white px-3 py-1.5 font-mono text-xs font-bold transform -rotate-1 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-[#EE1D24]"></span>
+                <span>Telukjambe Timur, Karawang • Bandung</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLLAGE CLUSTER (5 COLS): Mini YouTube Polaroid Card + Die-Cut CV Photo ID Badge + Wireless Mouse -->
+          <div class="lg:col-span-5 relative flex flex-col sm:flex-row lg:flex-col items-center justify-center gap-6">
+
+            <!-- MINI YOUTUBE VIDEO POLAROID CARD (design.md section 3) -->
+            <!-- White frame #FAFAFA, padding 8px 8px 14px 8px, rotation +11deg, split-screen thumbnail, "Perfect Imperfection", red progress bar, 08:42 -->
+            <div
+              onclick="openWatchlistModal('olaf')"
+              style="transform: rotate(11deg);"
+              class="polaroid-yt-card w-72 sm:w-80 cursor-pointer relative draggable-cutout group"
+              title="Klik untuk membuka rincian eksekusi OLAF 2026"
+            >
+              <!-- Top Washi Tape holding Polaroid -->
+              <div class="washi-tape w-24 h-6 absolute -top-3 left-1/2 -translate-x-1/2 transform -rotate-6 z-10"></div>
+
+              <!-- Split-Screen Video Thumbnail -->
+              <div class="relative h-40 w-full bg-[#5C3A21] rounded-xs overflow-hidden grid grid-cols-2 gap-0.5 border border-[#5C3A21]/20">
+                <!-- Left Split: 49 Panitia / 7 Divisi -->
+                <div class="bg-[#275034] p-3 flex flex-col justify-between text-white relative">
+                  <span class="font-mono text-[9px] bg-[#F5E216] text-[#5C3A21] font-bold px-1.5 py-0.5 w-fit">OLAF 2026</span>
+                  <div>
+                    <div class="font-extrabold text-3xl leading-none text-[#F5E216]">49</div>
+                    <div class="font-mono text-[10px] opacity-90">Panitia • 7 Divisi</div>
+                  </div>
+                  <div class="font-mono text-[9px] text-white/75">2 Des 2026</div>
+                </div>
+
+                <!-- Right Split: 100% HIMA/Ormawa FKS -->
+                <div class="bg-[#5C3A21] p-3 flex flex-col justify-between text-white relative">
+                  <span class="font-mono text-[9px] bg-white text-[#5C3A21] font-bold px-1.5 py-0.5 w-fit">FKS TEL-U</span>
+                  <div>
+                    <div class="font-extrabold text-3xl leading-none text-white">100%</div>
+                    <div class="font-mono text-[10px] text-[#F5E216]">Ormawa Terjangkau</div>
+                  </div>
+                  <div class="font-mono text-[9px] text-white/75">5 Bulan Timeline</div>
+                </div>
+
+                <!-- Center Mini Play Overlay -->
+                <div class="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/5 transition">
+                  <div class="w-10 h-7 bg-[#EE1D24] rounded-md flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                    <svg class="w-4 h-4 text-white ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Duration Badge 08:42 (JetBrains Mono) -->
+                <span class="absolute bottom-2 right-2 bg-black/85 text-white font-mono text-[10px] font-bold px-1.5 py-0.5 rounded-xs">
+                  08:42
+                </span>
+
+                <!-- Red YouTube Progress Bar -->
+                <div class="absolute bottom-0 left-0 right-0 h-1 bg-white/30">
+                  <div class="h-full w-4/5 bg-[#EE1D24]"></div>
+                </div>
+              </div>
+
+              <!-- Polaroid Caption -->
+              <div class="mt-2.5 flex items-center justify-between gap-2 px-1">
+                <div>
+                  <p class="font-extrabold text-sm text-[#5C3A21] leading-tight">"Perfect Imperfection" — OLAF 2026</p>
+                  <p class="font-mono text-[10px] text-[#5C3A21]/75 mt-0.5">Ketua Pelaksana • Right Person, Right Place</p>
+                </div>
+                <span class="font-mono text-[10px] bg-[#F5E216] text-[#5C3A21] font-bold px-1.5 py-0.5">HD</span>
+              </div>
+            </div>
+
+            <!-- DIE-CUT STICKER ID CARD (Representing Rayan's CV Photo with Black FKS Shirt & Red Lanyard) -->
+            <div
+              style="transform: rotate(-7deg);"
+              class="die-cut-sticker bg-[#FAFAFA] text-[#5C3A21] p-3.5 w-64 sm:w-72 relative draggable-cutout"
+            >
+              <!-- Red Lanyard Clip at Top -->
+              <div class="absolute -top-6 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none">
+                <div class="w-6 h-4 bg-[#EE1D24] rounded-t-xs border border-[#4A2E1B]"></div>
+                <div class="w-4 h-3 bg-[#E4E6E9] border border-[#4A2E1B] rounded-xs"></div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <!-- Stylized Vector Portrait matching CV Photo (Glasses, Black Committee Shirt, Red Lanyard) -->
+                <div class="w-16 h-20 bg-[#346744] rounded-xs overflow-hidden shrink-0 border border-[#5C3A21] relative flex items-end justify-center">
+                  <svg class="w-16 h-20" viewBox="0 0 64 80" fill="none">
+                    <!-- Foliage background like CV photo -->
+                    <circle cx="14" cy="18" r="16" fill="#478259" />
+                    <circle cx="52" cy="14" r="18" fill="#2A5537" />
+                    <!-- Black Committee Shirt -->
+                    <path d="M8 80 C8 58 56 58 56 80 Z" fill="#1E2022" />
+                    <!-- White & Red Embroidered Badges on Shirt -->
+                    <rect x="13" y="69" width="12" height="4" fill="#FAFAFA" />
+                    <path d="M40 67 L49 67 L47 72 L42 72 Z" fill="#EE1D24" />
+                    <!-- Red Lanyard Strap -->
+                    <path d="M25 58 L30 80 M39 58 L34 80" stroke="#EE1D24" stroke-width="3" />
+                    <!-- Head & Hair -->
+                    <circle cx="32" cy="36" r="13" fill="#D9A17C" />
+                    <path d="M18 33 C18 20 46 20 46 33 C44 26 38 24 32 25 C25 24 20 27 18 33 Z" fill="#1E1B18" />
+                    <!-- Eyeglasses -->
+                    <rect x="22" y="33" width="8" height="5" rx="1" stroke="#4A2E1B" stroke-width="1.4" fill="rgba(255,255,255,0.2)" />
+                    <rect x="34" y="33" width="8" height="5" rx="1" stroke="#4A2E1B" stroke-width="1.4" fill="rgba(255,255,255,0.2)" />
+                    <line x1="30" y1="35" x2="34" y2="35" stroke="#4A2E1B" stroke-width="1.4" />
+                    <!-- Friendly Smile -->
+                    <path d="M28 43 Q32 46 36 43" stroke="#5C3A21" stroke-width="1.5" stroke-linecap="round" />
+                  </svg>
+                </div>
+
+                <div class="space-y-1 text-xs">
+                  <span class="font-mono text-[10px] bg-[#EE1D24] text-white font-bold px-1.5 py-0.5 inline-block">STAFF PASS // FKS</span>
+                  <h2 class="font-extrabold text-sm leading-tight text-[#5C3A21]">M. RAYAN FAHREZY</h2>
+                  <p class="font-mono text-[10px] text-[#5C3A21]/80">Ilmu Komunikasi • Tel-U</p>
+                  <p class="font-mono text-[10px] font-bold text-[#346744]">HR &amp; Internal Comm.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- BOTTOM COLLAGE METRICS STICKER ROW + PHYSICAL WIRELESS MOUSE -->
+        <div class="mt-10 pt-6 border-t border-dashed border-white/40 flex flex-wrap items-center justify-between gap-4">
+          <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+            <!-- Metric Sticker 1 -->
+            <div class="paper-cutout-yellow px-4 py-2 transform -rotate-2 draggable-cutout">
+              <span class="font-mono text-[10px] font-bold block uppercase">OLAF 2026</span>
+              <span class="heading-cutout text-2xl sm:text-3xl">49 Panitia • 7 Divisi</span>
+            </div>
+            <!-- Metric Sticker 2 -->
+            <div class="paper-cutout-white px-4 py-2 transform rotate-2 draggable-cutout">
+              <span class="font-mono text-[10px] font-bold block uppercase text-[#EE1D24]">PEACE 2026 KARAWANG</span>
+              <span class="heading-cutout text-2xl sm:text-3xl">+10% Rekrutmen</span>
+            </div>
+            <!-- Metric Sticker 3 -->
+            <div class="paper-cutout-brown px-4 py-2 transform -rotate-1 draggable-cutout">
+              <span class="font-mono text-[10px] font-bold block uppercase text-[#F5E216]">JANGKAUAN BRANDING</span>
+              <span class="heading-cutout text-2xl sm:text-3xl">100% Ormawa FKS</span>
+            </div>
+          </div>
+
+          <!-- Physical Desk Object: Tactile Wireless Mouse (#E4E6E9) -->
+          <div
+            onclick="playKeyClick()"
+            title="Objek Meja: Wireless Studio Mouse (Klik untuk efek suara klik)"
+            style="transform: rotate(-14deg); background: var(--bg-surface-metal); box-shadow: var(--shadow-object);"
+            class="w-16 h-24 rounded-full border-2 border-[#C5C9CE] flex flex-col items-center pt-3 cursor-pointer hover:scale-105 transition select-none shrink-0"
+          >
+            <div class="w-2 h-5 bg-[#5C3A21] rounded-full mb-1"></div>
+            <div class="w-full h-[1px] bg-[#C5C9CE]"></div>
+            <span class="font-mono text-[8px] text-[#5C3A21]/60 mt-auto pb-2 font-bold">2.4G</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SECTION 2: RINGKASAN & TUJUAN KARIR (AUTHENTIC CV TEXT)           -->
+    <!-- Styled as Scrapbook Cutout Zine Sheets with Washi Tape & Pins     -->
+    <!-- ================================================================= -->
+    <section id="profil-karir" class="py-12 relative">
+      <!-- Section Header Cutout Cluster -->
+      <div class="flex flex-wrap items-center gap-3 mb-8">
+        <div class="paper-cutout-brown px-5 py-2.5 heading-cutout text-3xl sm:text-4xl transform -rotate-2">
+          01 // RINGKASAN
+        </div>
+        <div class="paper-cutout-yellow px-4 py-2 heading-cutout text-3xl sm:text-4xl transform rotate-1">
+          &amp; TUJUAN KARIR HR
+        </div>
+        <span class="font-mono text-xs text-white/85 bg-black/25 px-3 py-1 border border-dashed border-white/40">
+          SUMBER: CV MUHAMMAD RAYAN FAHREZY 2026 (HAL. 1)
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <!-- RINGKASAN CARD (White Paper Cutout rotated -1.5deg) -->
+        <div
+          style="transform: rotate(-1.5deg);"
+          class="lg:col-span-6 paper-cutout-white p-6 sm:p-8 relative flex flex-col justify-between"
+        >
+          <div class="washi-tape w-28 h-6 absolute -top-3 left-8 transform -rotate-3"></div>
+
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b-2 border-[#5C3A21] pb-2">
+              <span class="font-mono text-xs font-bold bg-[#5C3A21] text-white px-2.5 py-0.5">RINGKASAN PROFIL</span>
+              <span class="font-mono text-xs font-bold text-[#5C3A21]">ILMU KOMUNIKASI • TEL-U</span>
+            </div>
+
+            <p class="text-base sm:text-lg font-semibold text-[#5C3A21] leading-relaxed">
+              “Saat ini saya sedang melanjutkan sebuah pendidikan di <strong>Jurusan Ilmu Komunikasi, Universitas Telkom</strong>. Saya memiliki minat di bidang <strong>komunikasi dan teknologi</strong>. Untuk menyesuaikan dengan minat, Saya memiliki kemampuan interpersonal yang baik dan senang bekerja sama dengan orang lain sehingga Saya memiliki pengalaman dalam berorganisasi dan beberapa kepanitiaan.”
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-dashed border-[#5C3A21]/40 flex flex-wrap gap-2 font-mono text-xs font-bold">
+            <span class="px-2.5 py-1 bg-[#F5E216] text-[#5C3A21]">#InterpersonalCommunication</span>
+            <span class="px-2.5 py-1 bg-[#E4E6E9] text-[#5C3A21]">#KomunikasiDanTeknologi</span>
+            <span class="px-2.5 py-1 bg-[#5C3A21] text-white">#Teamwork</span>
+          </div>
+        </div>
+
+        <!-- TUJUAN KARIR HR CARD (Espresso Brown Paper Cutout rotated +1.5deg) -->
+        <div
+          style="transform: rotate(1.5deg);"
+          class="lg:col-span-6 paper-cutout-brown p-6 sm:p-8 relative flex flex-col justify-between"
+        >
+          <div class="washi-tape w-28 h-6 absolute -top-3 right-10 transform rotate-3"></div>
+
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b-2 border-[#F5E216] pb-2">
+              <span class="font-mono text-xs font-bold bg-[#F5E216] text-[#5C3A21] px-2.5 py-0.5">TUJUAN KARIR (HUMAN RESOURCES)</span>
+              <span class="font-mono text-xs font-bold text-[#F5E216]">SDM &amp; AUDIT KOMUNIKASI</span>
+            </div>
+
+            <p class="text-base sm:text-lg font-medium text-white leading-relaxed">
+              “Sebagai mahasiswa Ilmu Komunikasi dengan pengalaman aktif memimpin organisasi dan kepanitiaan, saya bertekad mengembangkan potensi di bidang <strong class="text-[#F5E216] underline decoration-dashed">Human Resources</strong>. Berbekal pemahaman teori <strong>komunikasi internal</strong>, <strong>Komunikasi Organisasi</strong>, dan akan menempuh mata kuliah <strong>Audit Komunikasi</strong>, saya ingin berkontribusi dalam mengelola SDM, membangun komunikasi internal yang efektif, serta menciptakan lingkungan kerja yang produktif.”
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-dashed border-white/30 flex flex-wrap gap-2 font-mono text-xs font-bold">
+            <span class="px-2.5 py-1 bg-[#F5E216] text-[#5C3A21]">#HumanResources</span>
+            <span class="px-2.5 py-1 bg-white text-[#5C3A21]">#KomunikasiOrganisasi</span>
+            <span class="px-2.5 py-1 bg-[#EE1D24] text-white">#AuditKomunikasi</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SECTION 3: PENGALAMAN ORGANISASI & KEPANITIAAN (ALL 6 ROLES)      -->
+    <!-- Tactile Scrapbook Cards with Authentic Bullet Points from CV PDF  -->
+    <!-- ================================================================= -->
+    <section id="pengalaman-zine" class="py-12 relative">
+      <!-- Header & Interactive Filter Cutouts -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="paper-cutout-yellow px-5 py-2.5 heading-cutout text-3xl sm:text-5xl transform -rotate-1">
+            02 // PENGALAMAN
+          </div>
+          <div class="paper-cutout-white px-5 py-2.5 heading-cutout text-3xl sm:text-5xl transform rotate-2">
+            ORGANISASI
+          </div>
+        </div>
+
+        <!-- Tactile Filter Buttons -->
+        <div class="flex flex-wrap items-center gap-2 font-mono text-xs font-bold" role="tablist">
+          <button
+            onclick="filterScrapbookExp('all')"
+            data-filter="all"
+            class="scrap-filter-btn paper-cutout-yellow px-4 py-2 transform -rotate-1 cursor-pointer transition"
+          >
+            ★ SEMUA (6)
+          </button>
+          <button
+            onclick="filterScrapbookExp('hr-lead')"
+            data-filter="hr-lead"
+            class="scrap-filter-btn paper-cutout-white px-3.5 py-2 transform rotate-1 cursor-pointer transition"
+          >
+            TOP LEADERSHIP &amp; HR (3)
+          </button>
+          <button
+            onclick="filterScrapbookExp('event')"
+            data-filter="event"
+            class="scrap-filter-btn paper-cutout-white px-3.5 py-2 transform -rotate-1 cursor-pointer transition"
+          >
+            MANAJEMEN ACARA (2)
+          </button>
+          <button
+            onclick="filterScrapbookExp('admin')"
+            data-filter="admin"
+            class="scrap-filter-btn paper-cutout-white px-3.5 py-2 transform rotate-2 cursor-pointer transition"
+          >
+            SEKRETARIAT (1)
+          </button>
+        </div>
+      </div>
+
+      <!-- 6 SCRAPBOOK COLLAGE CARDS GRID -->
+      <div id="scrapbook-exp-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- 1. KETUA PELAKSANA OLAF (2026) -->
+        <article
+          id="olaf-card"
+          data-exp-cat="hr-lead"
+          style="--r: -1.5deg;"
+          class="exp-scrap-card paper-cutout-white p-6 sm:p-7 relative flex flex-col justify-between transition-transform hover:rotate-0"
+        >
+          <div class="washi-tape w-24 h-5 absolute -top-2.5 left-6"></div>
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b-2 border-[#5C3A21]">
+              <span class="font-mono text-xs font-bold bg-[#EE1D24] text-white px-2.5 py-1">2026 • EKSEKUSI 2 DESEMBER 2026</span>
+              <span class="font-mono text-xs font-bold bg-[#F5E216] text-[#5C3A21] px-2.5 py-1">49 PANITIA // 7 DIVISI</span>
+            </div>
+
+            <h3 class="heading-cutout text-2xl sm:text-3xl text-[#5C3A21] mt-4">
+              Ketua Pelaksana OLAF
+            </h3>
+            <p class="font-mono text-xs font-bold text-[#346744] mt-1">
+              Fakultas Komunikasi dan Ilmu Sosial (FKS) — Universitas Telkom
+            </p>
+
+            <ul class="mt-4 space-y-2 text-sm font-medium text-[#5C3A21] list-disc list-inside leading-snug">
+              <li>Memimpin dan mengkoordinasikan <strong>49 panitia lintas 7 divisi selama 5 bulan</strong> untuk mengeksekusi OLAF 2026 tepat waktu pada <strong>2 Desember 2026</strong>.</li>
+              <li>Membuat <em>Timeline</em> yang harus dijalani selama <strong>5 bulan</strong> oleh setiap divisi yang ada di dalam kepanitiaan.</li>
+              <li>Merekrut dan menempatkan panitia di divisi yang tepat (<em>right person on the right place</em>), serta memastikan semua paham visi &amp; <em>SMART Goals</em> sejak awal.</li>
+              <li>Menjalankan kontrol kinerja lewat rapat mingguan dan sesi <em>1-on-1</em> untuk membantu memecahkan kendala kerja tim.</li>
+              <li>Menginisiasi narasi dan reposisi <em>branding</em> OLAF sebagai panggung apresiasi tertinggi fakultas, berhasil menjangkau <strong>100% HIMA/Ormawa se-FKS</strong>.</li>
+            </ul>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/30 flex items-center justify-between font-mono text-[11px] font-bold">
+            <span>KOMPETENSI: RIGHT PERSON, RIGHT PLACE • 1-ON-1</span>
+            <button onclick="openWatchlistModal('olaf')" class="text-[#EE1D24] underline cursor-pointer">▶ Tonton Studi Kasus</button>
+          </div>
+        </article>
+
+        <!-- 2. BEM KEMA FKS TELKOM UNIVERSITY (2026-2027) -->
+        <article
+          data-exp-cat="hr-lead"
+          style="--r: 1.8deg;"
+          class="exp-scrap-card paper-cutout-brown p-6 sm:p-7 relative flex flex-col justify-between transition-transform hover:rotate-0"
+        >
+          <div class="washi-tape w-24 h-5 absolute -top-2.5 right-8"></div>
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b-2 border-[#F5E216]">
+              <span class="font-mono text-xs font-bold bg-[#F5E216] text-[#5C3A21] px-2.5 py-1">2026 — 2027</span>
+              <span class="font-mono text-xs font-bold bg-white text-[#5C3A21] px-2.5 py-1">STAKEHOLDER RELATIONS</span>
+            </div>
+
+            <h3 class="heading-cutout text-2xl sm:text-3xl text-white mt-4">
+              BEM KEMA FKS Telkom University
+            </h3>
+            <p class="font-mono text-xs font-bold text-[#F5E216] mt-1">
+              Staff Dalam Negeri
+            </p>
+
+            <ul class="mt-4 space-y-2.5 text-sm font-medium text-white/95 list-disc list-inside leading-snug">
+              <li>Menginisiasi dan mengelola program penghargaan (<em>Appreciation Night / Awarding</em>) bagi mahasiswa berprestasi, dosen favorit, staf kampus, dan Ormawa guna meningkatkan motivasi serta keharmonisan yang positif di lingkungan Fakultas Komunikasi dan Ilmu Sosial.</li>
+              <li>Membangun hubungan yang solid (<em>Stakeholder Relations</em>) dengan pihak birokrasi, dosen, dan staf melalui program kerja yang inklusif, guna menciptakan sinergi yang harmonis antara mahasiswa dan pengelola kampus.</li>
+            </ul>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-dashed border-white/30 flex items-center justify-between font-mono text-[11px] font-bold text-[#F5E216]">
+            <span>KOMPETENSI: APPRECIATION NIGHT • INTERNAL HARMONY</span>
+            <span>FKS TEL-U</span>
+          </div>
+        </article>
+
+        <!-- 3. PEACE 2026 (ROADSHOW TEL-U KARAWANG) — WAKIL KETUA PELAKSANA (2025-2026) -->
+        <article
+          data-exp-cat="hr-lead"
+          style="--r: 1.2deg;"
+          class="exp-scrap-card paper-cutout-yellow p-6 sm:p-7 relative flex flex-col justify-between transition-transform hover:rotate-0"
+        >
+          <div class="washi-tape-white w-24 h-5 absolute -top-2.5 left-10"></div>
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b-2 border-[#5C3A21]">
+              <span class="font-mono text-xs font-bold bg-[#5C3A21] text-white px-2.5 py-1">2025 — 2026</span>
+              <span class="font-mono text-xs font-bold bg-[#FAFAFA] text-[#5C3A21] px-2.5 py-1">+10% REKRUTMEN ANGGOTA</span>
+            </div>
+
+            <h3 class="heading-cutout text-2xl sm:text-3xl text-[#5C3A21] mt-4">
+              PEACE 2026 (Roadshow Tel-U Karawang)
+            </h3>
+            <p class="font-mono text-xs font-bold text-[#5C3A21]/85 mt-1">
+              Wakil Ketua Pelaksana
+            </p>
+
+            <ul class="mt-4 space-y-2 text-sm font-semibold text-[#5C3A21] list-disc list-inside leading-snug">
+              <li>Berhasil merekrut mahasiswa Karawang untuk bergabung dengan kepanitiaan dan <strong>meningkatkan 10% jumlah anggota</strong> yang telah mengikuti kepanitiaan.</li>
+              <li>Membuat <em>Timeline</em> yang harus dijalani selama <strong>4 bulan</strong> oleh setiap divisi yang ada di dalam kepanitiaan.</li>
+              <li>Mengawasi secara langsung setiap divisi untuk menciptakan hasil yang didapatkan.</li>
+              <li>Membantu Ketua Pelaksana dalam membonding internal kepanitiaan agar anggota dapat bekerja dengan maksimal satu sama lain.</li>
+            </ul>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/40 flex items-center justify-between font-mono text-[11px] font-bold">
+            <span>KOMPETENSI: TALENT RECRUITMENT • INTERNAL BONDING</span>
+            <button onclick="openWatchlistModal('peace')" class="text-[#5C3A21] underline cursor-pointer">▶ Detail</button>
+          </div>
+        </article>
+
+        <!-- 4. LKKD 2025 — KEPALA DIVISI ACARA (2025) -->
+        <article
+          data-exp-cat="event"
+          style="--r: -1.6deg;"
+          class="exp-scrap-card paper-cutout-white p-6 sm:p-7 relative flex flex-col justify-between transition-transform hover:rotate-0"
+        >
+          <div class="washi-tape w-24 h-5 absolute -top-2.5 right-10"></div>
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b-2 border-[#5C3A21]">
+              <span class="font-mono text-xs font-bold bg-[#5C3A21] text-white px-2.5 py-1">2025</span>
+              <span class="font-mono text-xs font-bold bg-[#F5E216] text-[#5C3A21] px-2.5 py-1">KOMUNIKASI LINTAS FUNGSIONAL</span>
+            </div>
+
+            <h3 class="heading-cutout text-2xl sm:text-3xl text-[#5C3A21] mt-4">
+              LKKD 2025
+            </h3>
+            <p class="font-mono text-xs font-bold text-[#346744] mt-1">
+              Kepala Divisi Acara
+            </p>
+
+            <ul class="mt-4 space-y-2 text-sm font-medium text-[#5C3A21] list-disc list-inside leading-snug">
+              <li>Berkoordinasi secara langsung dengan beberapa pihak, untuk memastikan kelancaran kegiatan.</li>
+              <li>Melakukan manajemen kegiatan, dengan menyusun konsep acara, susunan acara, dan mengakomodasi kebutuhan perlengkapan acara dengan komunikasi antar fungsional.</li>
+              <li>Menjadi narahubung kepada <em>Staff</em> Acara untuk menyesuaikan ide-ide demi kelancaran acara.</li>
+              <li>Memonitor jalannya acara secara langsung untuk memastikan sesuai dengan jadwal dan arah acara.</li>
+            </ul>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/30 flex items-center justify-between font-mono text-[11px] font-bold">
+            <span>KOMPETENSI: MANAJEMEN ACARA • KOORDINASI TIM</span>
+            <span>2025</span>
+          </div>
+        </article>
+
+        <!-- 5. PEACE 2025 (ROADSHOW TEL-U KARAWANG) — STAFF DIVISI ACARA (2024-2025) -->
+        <article
+          data-exp-cat="event"
+          style="--r: -1deg;"
+          class="exp-scrap-card paper-cutout-brown p-6 sm:p-7 relative flex flex-col justify-between transition-transform hover:rotate-0"
+        >
+          <div class="washi-tape w-24 h-5 absolute -top-2.5 left-12"></div>
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b-2 border-[#F5E216]">
+              <span class="font-mono text-xs font-bold bg-[#F5E216] text-[#5C3A21] px-2.5 py-1">2024 — 2025</span>
+              <span class="font-mono text-xs font-bold bg-white text-[#5C3A21] px-2.5 py-1">REAL-TIME MONITORING</span>
+            </div>
+
+            <h3 class="heading-cutout text-2xl sm:text-3xl text-white mt-4">
+              PEACE 2025 (Roadshow Tel-U Karawang)
+            </h3>
+            <p class="font-mono text-xs font-bold text-[#F5E216] mt-1">
+              Staff Divisi Acara
+            </p>
+
+            <ul class="mt-4 space-y-2 text-sm font-medium text-white/95 list-disc list-inside leading-snug">
+              <li>Menyusun jadwal kegiatan terperinci dari awal hingga akhir.</li>
+              <li>Berkoordinasi dengan berbagai divisi untuk memastikan kelancaran kegiatan.</li>
+              <li>Memonitor jalannya kegiatan secara <em>real-time</em> untuk memastikan sesuai dengan jadwal yang tertera.</li>
+            </ul>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-dashed border-white/30 flex items-center justify-between font-mono text-[11px] font-bold text-[#F5E216]">
+            <span>KOMPETENSI: PENJADWALAN • KOORDINASI LINTAS DIVISI</span>
+            <span>KARAWANG</span>
+          </div>
+        </article>
+
+        <!-- 6. MPK (MAJELIS PERWAKILAN KELAS) — SEKRETARIS (2021-2023) -->
+        <article
+          data-exp-cat="admin"
+          style="--r: 1.4deg;"
+          class="exp-scrap-card paper-cutout-white p-6 sm:p-7 relative flex flex-col justify-between transition-transform hover:rotate-0"
+        >
+          <div class="washi-tape w-24 h-5 absolute -top-2.5 right-12"></div>
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b-2 border-[#5C3A21]">
+              <span class="font-mono text-xs font-bold bg-[#5C3A21] text-white px-2.5 py-1">2021 — 2023</span>
+              <span class="font-mono text-xs font-bold bg-[#F5E216] text-[#5C3A21] px-2.5 py-1">TATA KELOLA DOKUMEN</span>
+            </div>
+
+            <h3 class="heading-cutout text-2xl sm:text-3xl text-[#5C3A21] mt-4">
+              MPK (Majelis Perwakilan Kelas)
+            </h3>
+            <p class="font-mono text-xs font-bold text-[#346744] mt-1">
+              Sekretaris — SMAN 1 Telukjambe
+            </p>
+
+            <ul class="mt-4 space-y-2 text-sm font-medium text-[#5C3A21] list-disc list-inside leading-snug">
+              <li>Menyusun, menyimpan, dan mengelola setiap dokumen-dokumen yang dibuat maupun yang diterima.</li>
+              <li>Menjadi notaris saat melakukan kegiatan rapat.</li>
+              <li>Mengatur jadwal setiap kegiatan.</li>
+            </ul>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/30 flex items-center justify-between font-mono text-[11px] font-bold">
+            <span>KOMPETENSI: NOTULENSI RAPAT • ARSIP ORGANISASI</span>
+            <span>2021–2023</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SECTION 4: OLAF 2026 WATCHLIST BOARD + PENDIDIKAN & KETERAMPILAN  -->
+    <!-- ================================================================= -->
+    <section id="olaf-polaroid" class="py-12 relative">
+      <div id="pendidikan-ket" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        <!-- LEFT COLUMN (6 COLS): PENDIDIKAN (AUTHENTIC CV DATA) -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="paper-cutout-brown px-4 py-2 heading-cutout text-3xl transform -rotate-2">
+              03 // PENDIDIKAN
+            </div>
+            <div class="paper-cutout-yellow px-3 py-1.5 font-mono text-xs font-bold transform rotate-2">
+              AKADEMIK
+            </div>
+          </div>
+
+          <!-- Universitas Telkom Cutout Card -->
+          <div style="transform: rotate(-1deg);" class="paper-cutout-white p-6 relative">
+            <div class="flex items-center justify-between font-mono text-xs font-bold mb-2">
+              <span class="bg-[#EE1D24] text-white px-2.5 py-0.5">2024 — SEKARANG</span>
+              <span class="text-[#5C3A21]">BANDUNG</span>
+            </div>
+            <h3 class="heading-cutout text-2xl sm:text-3xl text-[#5C3A21]">Jurusan Ilmu Komunikasi</h3>
+            <p class="font-extrabold text-base text-[#346744] mt-1">Universitas Telkom</p>
+            <p class="text-sm font-medium text-[#5C3A21] mt-2">
+              Mahasiswa Universitas Telkom Bandung jurusan komunikasi. Mendalami teori komunikasi internal, Komunikasi Organisasi, serta persiapan mata kuliah Audit Komunikasi untuk pengembangan Sumber Daya Manusia (HR).
+            </p>
+          </div>
+
+          <!-- SMAN 1 Telukjambe Cutout Card -->
+          <div style="transform: rotate(1.5deg);" class="paper-cutout-yellow p-6 relative">
+            <div class="flex items-center justify-between font-mono text-xs font-bold mb-2">
+              <span class="bg-[#5C3A21] text-white px-2.5 py-0.5">2021 — 2024</span>
+              <span class="text-[#5C3A21]">KARAWANG</span>
+            </div>
+            <h3 class="heading-cutout text-2xl sm:text-3xl text-[#5C3A21]">Jurusan IPA (Ilmu Pengetahuan Alam)</h3>
+            <p class="font-extrabold text-base text-[#5C3A21] mt-1">SMAN 1 TELUKJAMBE</p>
+            <p class="text-sm font-semibold text-[#5C3A21]/90 mt-2">
+              Aktif berorganisasi sebagai Sekretaris Majelis Perwakilan Kelas (MPK) periode 2021–2023.
+            </p>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN (6 COLS): INFORMASI TAMBAHAN (KETERAMPILAN & BAHASA) -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="paper-cutout-white px-4 py-2 heading-cutout text-3xl transform rotate-1">
+              04 // INFORMASI TAMBAHAN
+            </div>
+            <div class="paper-cutout-brown px-3 py-1.5 font-mono text-xs font-bold text-[#F5E216] transform -rotate-2">
+              SKILLS &amp; BAHASA
+            </div>
+          </div>
+
+          <div class="crop-mark-box p-6 bg-[#275034]/70 space-y-6">
+            <div>
+              <span class="font-mono text-xs font-bold text-[#F5E216] block mb-3 uppercase">
+                KETERAMPILAN UTAMA (SESUAI CV &amp; PRAKTIK ORGANISASI):
+              </span>
+              <!-- Sticker Cluster of Skills -->
+              <div class="flex flex-wrap gap-3">
+                <div class="paper-cutout-yellow px-4 py-2 font-extrabold text-base transform -rotate-2 draggable-cutout">
+                  ★ Kemampuan Beradaptasi
+                </div>
+                <div class="paper-cutout-white px-4 py-2 font-extrabold text-base transform rotate-2 draggable-cutout">
+                  ★ Bekerja Sama (Teamwork)
+                </div>
+                <div class="paper-cutout-brown px-3.5 py-2 font-mono text-xs font-bold transform -rotate-1 draggable-cutout">
+                  Komunikasi Internal &amp; Organisasi
+                </div>
+                <div class="paper-cutout-white px-3.5 py-2 font-mono text-xs font-bold transform rotate-1 draggable-cutout">
+                  Right Person on the Right Place
+                </div>
+                <div class="paper-cutout-yellow px-3.5 py-2 font-mono text-xs font-bold transform -rotate-2 draggable-cutout">
+                  Kontrol Kinerja &amp; Sesi 1-on-1
+                </div>
+                <div class="paper-cutout-brown px-3.5 py-2 font-mono text-xs font-bold transform rotate-2 draggable-cutout">
+                  Stakeholder Relations &amp; SMART Goals
+                </div>
+                <div class="paper-cutout-white px-3.5 py-2 font-mono text-xs font-bold transform -rotate-1 draggable-cutout">
+                  Persiapan Audit Komunikasi
+                </div>
+              </div>
+            </div>
+
+            <!-- Bahasa Section -->
+            <div class="pt-4 border-t border-dashed border-white/40">
+              <span class="font-mono text-xs font-bold text-[#F5E216] block mb-3 uppercase">
+                BAHASA (LANGUAGES):
+              </span>
+              <div class="flex flex-wrap gap-4">
+                <div class="die-cut-sticker bg-[#5C3A21] text-white px-5 py-2.5 font-extrabold text-lg transform -rotate-2">
+                  🇮🇩 Bahasa Indonesia
+                </div>
+                <div class="die-cut-sticker bg-[#F5E216] text-[#5C3A21] px-5 py-2.5 font-extrabold text-lg transform rotate-2">
+                  🇬🇧 Bahasa Inggris
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SECTION 5: KONTAK & STUDIO DESK CALL-TO-ACTION                    -->
+    <!-- ================================================================= -->
+    <section id="kontak-desk" class="py-12">
+      <div class="crop-mark-box p-6 sm:p-10 md:p-12 relative bg-[#2A5537]/60">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+          <!-- Left Headline Collage -->
+          <div class="lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center gap-2">
+              <span class="paper-cutout-yellow px-3 py-1 font-mono text-xs font-bold">OPEN FOR HR &amp; COMM. OPPORTUNITIES</span>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="paper-cutout-brown px-5 py-3 heading-cutout text-4xl sm:text-5xl transform -rotate-2">Mari</span>
+              <span class="paper-cutout-yellow px-5 py-3 heading-cutout text-4xl sm:text-5xl transform rotate-1">Berkolaborasi</span>
+              <span class="paper-cutout-white px-5 py-3 heading-cutout text-4xl sm:text-5xl transform -rotate-1">Bersama!</span>
+            </div>
+
+            <p class="text-white/95 text-base sm:text-lg max-w-xl font-medium pt-2">
+              Siap berkontribusi dalam mengelola SDM, membangun komunikasi internal yang efektif, dan menciptakan lingkungan kerja yang produktif di tim Anda.
+            </p>
+          </div>
+
+          <!-- Right Contact Cutout Cards (Authentic CV Contact Data) -->
+          <div class="lg:col-span-5 space-y-4">
+            <!-- Email Cutout -->
+            <div style="transform: rotate(-1.5deg);" class="paper-cutout-white p-4 flex items-center justify-between gap-3">
+              <div>
+                <span class="font-mono text-[10px] font-bold text-[#5C3A21]/70 block">EMAIL RESMI</span>
+                <a href="mailto:mrfahrezy18@gmail.com" class="font-mono text-sm sm:text-base font-bold text-[#5C3A21] hover:text-[#EE1D24] break-all">
+                  mrfahrezy18@gmail.com
+                </a>
+              </div>
+              <button
+                onclick="copyTextToClipboard('mrfahrezy18@gmail.com')"
+                class="paper-cutout-yellow px-3 py-1.5 font-mono text-xs font-bold hover:brightness-95 cursor-pointer shrink-0"
+              >
+                Salin
+              </button>
+            </div>
+
+            <!-- Phone / WhatsApp Cutout -->
+            <div style="transform: rotate(1.5deg);" class="paper-cutout-yellow p-4 flex items-center justify-between gap-3">
+              <div>
+                <span class="font-mono text-[10px] font-bold text-[#5C3A21]/80 block">TELEPON / WHATSAPP</span>
+                <a href="https://wa.me/6285591394965" target="_blank" rel="noopener noreferrer" class="font-mono text-sm sm:text-base font-bold text-[#5C3A21] hover:underline">
+                  +62 855-9139-4965
+                </a>
+              </div>
+              <button
+                onclick="copyTextToClipboard('+62 855-9139-4965')"
+                class="paper-cutout-brown px-3 py-1.5 font-mono text-xs font-bold text-white hover:brightness-110 cursor-pointer shrink-0"
+              >
+                Salin
+              </button>
+            </div>
+
+            <!-- Address Cutout -->
+            <div style="transform: rotate(-1deg);" class="paper-cutout-brown p-4 flex items-center justify-between gap-3">
+              <div>
+                <span class="font-mono text-[10px] font-bold text-[#F5E216] block">ALAMAT DOMISILI</span>
+                <span class="font-mono text-sm font-bold text-white">
+                  Telukjambe Timur, Karawang • Bandung
+                </span>
+              </div>
+              <span class="font-mono text-xs bg-[#F5E216] text-[#5C3A21] font-bold px-2 py-0.5">ID</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================================================================== -->
+  <!-- INTERACTIVE YOUTUBE WATCHLIST / CASE STUDY MODAL                    -->
+  <!-- Triggered when clicking the Glossy Red YouTube Play Badge / Polaroid-->
+  <!-- =================================================================== -->
+  <div
+    id="watchlist-modal"
+    class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-xs flex items-center justify-center p-4"
+    onclick="if(event.target === this) closeWatchlistModal()"
+  >
+    <div style="transform: rotate(-1deg);" class="polaroid-yt-card max-w-xl w-full p-5 sm:p-6 relative border-4 border-[#FAFAFA]">
+      <!-- Modal Top Controls -->
+      <div class="flex items-center justify-between pb-3 mb-4 border-b-2 border-[#5C3A21]">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-[#EE1D24]"></span>
+          <span id="modal-badge-title" class="font-mono text-xs font-bold text-[#5C3A21]">HR WATCHLIST // STUDI KASUS OLAF 2026</span>
+        </div>
+        <button
+          onclick="closeWatchlistModal()"
+          class="retro-control-box"
+          title="Tutup Jendela"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Simulated Interactive Video Screen -->
+      <div class="bg-[#5C3A21] text-white p-5 rounded-xs relative overflow-hidden space-y-3">
+        <div class="flex items-center justify-between font-mono text-xs text-[#F5E216]">
+          <span id="modal-episode-tag">EPISODE 01 • KETUA PELAKSANA OLAF 2026</span>
+          <span>08:42 / 10:00</span>
+        </div>
+
+        <h3 id="modal-Main-Heading" class="heading-cutout text-2xl sm:text-3xl text-white">
+          "Perfect Imperfection": Memimpin 49 Panitia Lintas 7 Divisi Selama 5 Bulan
+        </h3>
+
+        <p id="modal-description" class="text-sm text-white/90 leading-relaxed">
+          Melalui prinsip <strong>Right Person on the Right Place</strong>, penetapan <strong>SMART Goals</strong> sejak hari pertama, serta evaluasi rutin lewat rapat mingguan dan sesi <strong>1-on-1</strong>, OLAF 2026 ditargetkan terlaksana tepat waktu pada 2 Desember 2026 dan menjangkau <strong>100% HIMA/Ormawa se-FKS Universitas Telkom</strong>.
+        </p>
+
+        <!-- Progress Bar -->
+        <div class="pt-3">
+          <div class="w-full h-2 bg-white/25 rounded-full overflow-hidden">
+            <div class="w-4/5 h-full bg-[#EE1D24]"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Episode Switcher -->
+      <div class="mt-4 flex flex-wrap items-center justify-between gap-2">
+        <div class="flex gap-2 font-mono text-xs font-bold">
+          <button onclick="openWatchlistModal('olaf')" class="paper-cutout-yellow px-3 py-1.5 cursor-pointer">
+            1. OLAF 2026 (49 Panitia)
+          </button>
+          <button onclick="openWatchlistModal('peace')" class="paper-cutout-brown text-white px-3 py-1.5 cursor-pointer">
+            2. PEACE 2026 (+10% Rekrutmen)
+          </button>
+        </div>
+        <button onclick="closeWatchlistModal()" class="font-mono text-xs font-bold text-[#5C3A21] underline cursor-pointer px-2 py-1">
+          Tutup [ESC]
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST MESSAGE BOX (NO alert() USED) -->
+  <div
+    id="tactile-toast"
+    class="fixed bottom-16 left-1/2 -translate-x-1/2 z-50 hidden paper-cutout-yellow px-5 py-2.5 font-mono text-xs font-bold border-2 border-[#4A2E1B] shadow-2xl"
+  >
+    Tersalin ke papan klip!
+  </div>
+
+
   <script type="module" src="/src/main.ts"></script>
 </body>
 </html>

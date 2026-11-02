@@ -1,0 +1,296 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================================
+   DESIGN SYSTEM SPECIFICATION (design.md) — EXACT TOKENS
+   Archetype: Tactile Cutting-Mat Collage / Analog-Digital Scrapbook UI
+   ===================================================================== */
+:root {
+  --bg-primary: #346744;
+  --bg-grid-line: rgba(255, 255, 255, 0.32);
+  --bg-surface-brown: #5C3A21;
+  --bg-surface-yellow: #F5E216;
+  --bg-surface-white: #FAFAFA;
+  --bg-surface-metal: #E4E6E9;
+  --text-primary: #5C3A21;
+  --text-on-dark: #FFFFFF;
+  --accent-primary: #EE1D24;
+  --accent-secondary: #F5E216;
+  --border-subtle: rgba(255, 255, 255, 0.45);
+  --border-ink: #4A2E1B;
+
+  /* Elevation & Tactile Shadows */
+  --shadow-paper: 0 8px 16px -2px rgba(14, 34, 19, 0.42), 0 2px 4px rgba(0, 0, 0, 0.25);
+  --shadow-object: 0 16px 28px -4px rgba(10, 26, 14, 0.55), 0 4px 8px rgba(0, 0, 0, 0.35);
+  --shadow-inset-switch: inset 0 2px 5px rgba(0, 0, 0, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #2E6140;
+  color: var(--text-on-dark);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  overflow-x: hidden;
+  /* Self-healing mat: fine 24px grid, heavier line every 5th (120px), anchored to the page so it scrolls with the content */
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.20) 1.5px, transparent 1.5px),
+    linear-gradient(to bottom, rgba(255,255,255,0.20) 1.5px, transparent 1.5px),
+    linear-gradient(to right, rgba(255,255,255,0.085) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.085) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  background-position: 0 0;
+}
+
+/* Soft light pool + edge falloff (fixed to viewport, so it never stretches over a long page) */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 0%, rgba(255,255,255,0.07), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(8,24,13,0.38) 100%);
+}
+
+/* Matte vinyl grain */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.16; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Anchored jumps shouldn't hide under the fixed ruler */
+[id] { scroll-margin-top: 72px; }
+
+@layer components {
+  /* Heading Typography Specification */
+  .heading-cutout {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+  }
+
+  /* Paper Cutout Sharp Scissor-Cut Edge (0px - 2px radius, NO border) */
+  .paper-cutout-brown {
+    background-color: var(--bg-surface-brown);
+    color: var(--text-on-dark);
+    border-radius: 2px;
+    border: none;
+    box-shadow: var(--shadow-paper);
+  }
+
+  .paper-cutout-yellow {
+    background-color: var(--bg-surface-yellow);
+    color: var(--text-primary);
+    border-radius: 2px;
+    border: none;
+    box-shadow: var(--shadow-paper);
+  }
+
+  .paper-cutout-white {
+    background-color: var(--bg-surface-white);
+    color: var(--text-primary);
+    border-radius: 2px;
+    border: none;
+    box-shadow: var(--shadow-paper);
+  }
+
+  /* Die-Cut Sticker (4px solid #FAFAFA) */
+  .die-cut-sticker {
+    border: 4px solid var(--bg-surface-white);
+    box-shadow: var(--shadow-object);
+  }
+
+  /* Retro Window Control Trio (24x24px, #F5E216, 1.5px solid #4A2E1B, 2px radius) */
+  .retro-control-box {
+    width: 24px;
+    height: 24px;
+    background-color: var(--bg-surface-yellow);
+    border: 1.5px solid var(--border-ink);
+    border-radius: 2px;
+    color: var(--border-ink);
+    box-shadow: 0 3px 6px rgba(10, 26, 14, 0.35);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.15s ease;
+    cursor: pointer;
+  }
+  .retro-control-box:hover {
+    transform: translateY(-2px) scale(1.08) !important;
+    background-color: #fff04d;
+  }
+
+  /* Dashed Cutting Guide / Crop Marks */
+  .crop-mark-box {
+    border: 1.5px dashed rgba(255, 255, 255, 0.55);
+  }
+  body.xray-mode .crop-mark-box,
+  body.xray-mode .xray-outline {
+    border-color: #F5E216 !important;
+    box-shadow: 0 0 0 2px rgba(245, 226, 22, 0.25);
+  }
+
+  /* Tactile 3D Toggle Switch (76x42px track, #D5D8DC, 34x34px thumb) */
+  .tactile-switch-track {
+    width: 76px;
+    height: 42px;
+    background-color: #D5D8DC;
+    border-radius: 9999px;
+    box-shadow: var(--shadow-paper), var(--shadow-inset-switch);
+    padding: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.25s ease;
+  }
+  .tactile-switch-track.active {
+    background-color: #5C3A21;
+  }
+  .tactile-switch-thumb {
+    width: 34px;
+    height: 34px;
+    background-color: #FFFFFF;
+    border-radius: 9999px;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.35), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .tactile-switch-track.active .tactile-switch-thumb {
+    transform: translateX(34px);
+    background-color: #F5E216;
+  }
+
+  /* YouTube Glossy Play Badge (88x62px, #EE1D24, radius 16px, rotate +6deg) */
+  .yt-glossy-badge {
+    width: 88px;
+    height: 62px;
+    background: linear-gradient(180deg, #FF3B41 0%, #EE1D24 48%, #C91117 100%);
+    border-radius: 16px;
+    box-shadow: var(--shadow-object), inset 0 2px 3px rgba(255, 255, 255, 0.55);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .yt-glossy-badge::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 8px;
+    right: 8px;
+    height: 22px;
+    border-radius: 12px 12px 50% 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.02) 100%);
+    pointer-events: none;
+  }
+  .yt-glossy-badge:hover {
+    transform: rotate(9deg) scale(1.08) !important;
+  }
+
+  /* Mini YouTube Video Polaroid Card (radius 6px, padding 8px 8px 14px 8px) */
+  .polaroid-yt-card {
+    background-color: var(--bg-surface-white);
+    color: var(--text-primary);
+    border-radius: 6px;
+    padding: 8px 8px 14px 8px;
+    box-shadow: var(--shadow-object);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .polaroid-yt-card:hover {
+    z-index: 30;
+  }
+
+  /* Mechanical Keyboard Keycap Tactile Feel */
+  .mech-frame {
+    background-color: var(--bg-surface-metal);
+    box-shadow: var(--shadow-object), inset 0 2px 0 rgba(255,255,255,0.8);
+    border: 2px solid #C5C9CE;
+  }
+  .mech-key {
+    border-radius: 6px;
+    box-shadow: 0 4px 0 #3A2312, 0 6px 8px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.35);
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
+    user-select: none;
+    cursor: pointer;
+  }
+  .mech-key:active,
+  .mech-key.pressed {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #3A2312, 0 2px 3px rgba(0,0,0,0.25);
+  }
+
+  /* Washi Tape / Masking Tape Strip */
+  .washi-tape {
+    background: rgba(245, 226, 22, 0.82);
+    box-shadow: 0 2px 5px rgba(10, 26, 14, 0.22);
+    border-left: 2px dashed rgba(92, 58, 33, 0.25);
+    border-right: 2px dashed rgba(92, 58, 33, 0.25);
+  }
+  .washi-tape-white {
+    background: rgba(250, 250, 250, 0.78);
+    box-shadow: 0 2px 5px rgba(10, 26, 14, 0.22);
+    border-left: 2px dashed rgba(92, 58, 33, 0.2);
+    border-right: 2px dashed rgba(92, 58, 33, 0.2);
+  }
+
+  /* Draggable Interactive Item Cursor */
+  .draggable-cutout {
+    cursor: grab;
+  }
+  .draggable-cutout:active {
+    cursor: grabbing;
+    z-index: 45 !important;
+  }
+
+  /* Cutting Mat Ruler Markings */
+  .ruler-top {
+    background-image: linear-gradient(to right, rgba(255,255,255,0.6) 1px, transparent 1px);
+    background-size: 24px 6px;
+    background-repeat: repeat-x;
+    background-position: 0 100%;
+  }
+
+  /* Cards waiting for their scroll-in (class is added by JS only when GSAP is available) */
+  .pre-paste { opacity: 0; }
+
+  /* §7 item 2: hover:rotate-0 fix via CSS variable --r */
+  .exp-scrap-card {
+    transform: rotate(var(--r, 0deg));
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .exp-scrap-card:hover {
+    --r: 0deg !important;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #275034;
+}
+::-webkit-scrollbar-thumb {
+  background: #F5E216;
+  border-radius: 2px;
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .pre-paste {
+    opacity: 1 !important;
+  }
+}
