@@ -1,0 +1,7 @@
+node_modules
+dist
+.git
+legacy
+tests/e2e/__baseline__
+*.md
+.github
