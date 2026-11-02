@@ -282,6 +282,12 @@ body::after {
   border-radius: 2px;
 }
 
+/* Accessibility: Focus visible outline */
+:focus-visible {
+  outline: 2px solid #F5E216;
+  outline-offset: 2px;
+}
+
 /* Accessibility: Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {

@@ -10,6 +10,10 @@ export function setOnFilterChangeHook(fn: () => void): void {
 
 export const registerFilterChangeCallback = setOnFilterChangeHook;
 
+export function matchExperienceCard(cardCat: string | null, filterCat: string): boolean {
+  return filterCat === 'all' || cardCat === filterCat;
+}
+
 export function filterScrapbookExp(cat: ExperienceCategory | string): void {
   playKeyClick(640);
   const cards = document.querySelectorAll<HTMLElement>('.exp-scrap-card');
@@ -27,7 +31,7 @@ export function filterScrapbookExp(cat: ExperienceCategory | string): void {
 
   cards.forEach((card) => {
     const cardCat = card.getAttribute('data-exp-cat');
-    if (cat === 'all' || cardCat === cat) {
+    if (matchExperienceCard(cardCat, cat)) {
       card.classList.remove('hidden');
     } else {
       card.classList.add('hidden');

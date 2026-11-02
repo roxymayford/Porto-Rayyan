@@ -3,17 +3,21 @@ import { showTactileToast } from './toast';
 import { resetDraggablePositions } from './draggable';
 
 // --- Zoom Pill Control ---
-const zoomLevels = [
+export const zoomLevels = [
   { label: '1000', scale: 1 },
   { label: '0920', scale: 0.94 },
   { label: '1050', scale: 1.03 },
 ] as const;
 
+export function getNextZoomIndex(current: number): number {
+  return (current + 1) % zoomLevels.length;
+}
+
 let currentZoomIdx = 0;
 
 export function cycleCanvasZoom(): void {
   playKeyClick(760);
-  currentZoomIdx = (currentZoomIdx + 1) % zoomLevels.length;
+  currentZoomIdx = getNextZoomIndex(currentZoomIdx);
   const z = zoomLevels[currentZoomIdx]!;
   const counterEl = document.getElementById('zoom-counter-value');
   const canvasEl = document.getElementById('studio-canvas');
@@ -28,11 +32,15 @@ export function cycleCanvasZoom(): void {
 }
 
 // --- Headline Copy Cycle ---
+export function getNextHeadlineMode(current: number): number {
+  return (current + 1) % 3;
+}
+
 let headlineMode = 0;
 
 export function toggleHeadlineCopy(): void {
   playKeyClick(740);
-  headlineMode = (headlineMode + 1) % 3;
+  headlineMode = getNextHeadlineMode(headlineMode);
   const t1 = document.getElementById('cutout-text-1');
   const t2 = document.getElementById('cutout-text-2');
   const t3 = document.getElementById('cutout-text-3');
