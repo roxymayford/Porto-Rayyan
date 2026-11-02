@@ -4,8 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Muhammad Rayan Fahrezy — Creative HR &amp; Organizational Comm. Scrapbook Portfolio</title>
+  <meta name="description" content="Portofolio Muhammad Rayan Fahrezy — Mahasiswa Ilmu Komunikasi Universitas Telkom, berfokus pada Human Resources (HR), Kepemimpinan Organisasi, dan Komunikasi Korporat." />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href="%VITE_SITE_URL%/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="%VITE_SITE_URL%/" />
+  <meta property="og:title" content="Muhammad Rayan Fahrezy — Creative HR &amp; Organizational Comm. Portfolio" />
+  <meta property="og:description" content="Portofolio Scrapbook Meja Potong: Kepemimpinan HR, 6 Rekam Jejak Organisasi, dan Komunikasi Korporat." />
+  <meta property="og:image" content="%VITE_SITE_URL%/og-image.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="%VITE_SITE_URL%/" />
+  <meta property="twitter:title" content="Muhammad Rayan Fahrezy — Creative HR Portfolio" />
+  <meta property="twitter:description" content="Portofolio Scrapbook Meja Potong: Kepemimpinan HR, 6 Rekam Jejak Organisasi, dan Komunikasi Korporat." />
+  <meta property="twitter:image" content="%VITE_SITE_URL%/og-image.png" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Muhammad Rayan Fahrezy",
+    "jobTitle": "Creative HR & Organizational Communications Specialist",
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Universitas Telkom"
+    },
+    "url": "%VITE_SITE_URL%/",
+    "email": "mailto:mrfahrezy18@gmail.com",
+    "knowsAbout": ["Human Resources", "Organizational Communication", "Talent Management", "Event Management"]
+  }
+  </script>
 </head>
 <body class="min-h-screen relative selection:bg-[#F5E216] selection:text-[#5C3A21]">
+
   <!-- =================================================================== -->
   <!-- CUTTING MAT PRECISION RULER TOP & SIDE MARKINGS                     -->
   <!-- =================================================================== -->
@@ -24,8 +60,8 @@
   <!-- =================================================================== -->
   <div class="fixed top-9 left-4 sm:left-6 z-50 flex items-center gap-2.5">
     <button
-      id="floating-back-btn"
-      onclick="toggleQuickJumpMenu()"
+      id="floating-back-btn" aria-expanded="false" aria-controls="quick-jump-menu"
+      data-action="toggle-menu"
       title="Studio Desk Navigation & Reset Collage"
       aria-label="Navigasi Meja Kerja & Reset Kolase"
       style="width: 48px; height: 48px; background: #FFFFFF; border-radius: 16px; box-shadow: var(--shadow-object);"
@@ -42,13 +78,13 @@
         <span>STUDIO DESK MAP</span>
         <span class="text-[#F5E216]">A1</span>
       </div>
-      <a href="#collage-hero" onclick="toggleQuickJumpMenu()" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">Hero Collage &amp; Play</a>
-      <a href="#profil-karir" onclick="toggleQuickJumpMenu()" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">01. Ringkasan &amp; Tujuan HR</a>
-      <a href="#pengalaman-zine" onclick="toggleQuickJumpMenu()" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">02. 6 Rekam Jejak (2021–2027)</a>
-      <a href="#pendidikan-ket" onclick="toggleQuickJumpMenu()" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">03–04. Pendidikan &amp; Skills</a>
-      <a href="#kontak-desk" onclick="toggleQuickJumpMenu()" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">Kontak</a>
+      <a href="#collage-hero" data-action="toggle-menu" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">Hero Collage &amp; Play</a>
+      <a href="#profil-karir" data-action="toggle-menu" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">01. Ringkasan &amp; Tujuan HR</a>
+      <a href="#pengalaman-zine" data-action="toggle-menu" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">02. 6 Rekam Jejak (2021–2027)</a>
+      <a href="#pendidikan-ket" data-action="toggle-menu" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">03–04. Pendidikan &amp; Skills</a>
+      <a href="#kontak-desk" data-action="toggle-menu" class="block px-2.5 py-1.5 hover:bg-[#F5E216] rounded-xs transition font-semibold">Kontak</a>
       <div class="pt-1 border-t border-[#5C3A21]/20">
-        <button onclick="resetDraggablePositions(); toggleQuickJumpMenu();" class="w-full text-left px-2.5 py-1.5 bg-[#F5E216] text-[#5C3A21] font-bold hover:brightness-95 cursor-pointer">
+        <button data-action="reset-desk" class="w-full text-left px-2.5 py-1.5 bg-[#F5E216] text-[#5C3A21] font-bold hover:brightness-95 cursor-pointer">
           ↺ Rapikan Potongan Kertas
         </button>
       </div>
@@ -59,7 +95,7 @@
   <div class="fixed bottom-5 right-4 sm:right-6 z-50 flex items-center gap-2">
     <button
       id="zoom-pill-btn"
-      onclick="cycleCanvasZoom()"
+      data-action="cycle-zoom"
       title="Klik untuk mengubah skala meja kerja (900 / 1000 / 1080)"
       style="background: rgba(255, 255, 255, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 9999px; box-shadow: var(--shadow-paper);"
       class="px-4 py-2 flex items-center gap-2 text-[#111827] font-mono text-xs font-bold hover:bg-white transition cursor-pointer border border-white/60"
@@ -108,27 +144,27 @@
           <span>MRF-65% STUDIO KBD</span>
         </div>
 
-        <a href="#collage-hero" onclick="playKeyClick()" class="mech-key bg-[#5C3A21] text-white font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
+        <a href="#collage-hero" data-action="click-sound" class="mech-key bg-[#5C3A21] text-white font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
           <span class="text-[#F5E216] text-[10px]">ESC</span>
           <span>HERO</span>
         </a>
-        <a href="#profil-karir" onclick="playKeyClick()" class="mech-key bg-[#FAFAFA] text-[#5C3A21] font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
+        <a href="#profil-karir" data-action="click-sound" class="mech-key bg-[#FAFAFA] text-[#5C3A21] font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
           <span class="opacity-60 text-[10px]">F1</span>
           <span>PROFIL &amp; HR</span>
         </a>
-        <a href="#pengalaman-zine" onclick="playKeyClick()" class="mech-key bg-[#F5E216] text-[#5C3A21] font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
+        <a href="#pengalaman-zine" data-action="click-sound" class="mech-key bg-[#F5E216] text-[#5C3A21] font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
           <span class="opacity-70 text-[10px]">F2</span>
           <span>6 PENGALAMAN</span>
         </a>
-        <a href="#olaf-card" onclick="playKeyClick()" class="mech-key bg-[#FAFAFA] text-[#5C3A21] font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
+        <a href="#olaf-card" data-action="click-sound" class="mech-key bg-[#FAFAFA] text-[#5C3A21] font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
           <span class="opacity-60 text-[10px]">F3</span>
           <span>OLAF 2026</span>
         </a>
-        <a href="#pendidikan-ket" onclick="playKeyClick()" class="mech-key bg-[#FAFAFA] text-[#5C3A21] font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
+        <a href="#pendidikan-ket" data-action="click-sound" class="mech-key bg-[#FAFAFA] text-[#5C3A21] font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
           <span class="opacity-60 text-[10px]">F4</span>
           <span>PENDIDIKAN</span>
         </a>
-        <a href="#kontak-desk" onclick="playKeyClick()" class="mech-key bg-[#EE1D24] text-white font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
+        <a href="#kontak-desk" data-action="click-sound" class="mech-key bg-[#EE1D24] text-white font-mono text-xs font-bold px-3 py-2 flex items-center gap-1.5">
           <span class="text-[#F5E216] text-[10px]">ENT</span>
           <span>KONTAK</span>
         </a>
@@ -140,7 +176,7 @@
           GESER STIKER &amp; KERTAS DI ATAS ALAS POTONG ✂️
         </span>
         <button
-          onclick="resetDraggablePositions()"
+          data-action="reset-desk"
           class="paper-cutout-yellow px-3 py-1.5 font-mono text-xs font-bold hover:brightness-105 active:translate-y-0.5 transition cursor-pointer transform -rotate-2"
         >
           ↺ Reset Meja
@@ -171,7 +207,7 @@
           </div>
           <div class="flex items-center gap-3">
             <button
-              onclick="toggleHeadlineCopy()"
+              data-action="cycle-headline"
               class="px-2.5 py-1 bg-white/15 hover:bg-white/25 border border-white/40 text-[11px] font-mono rounded-xs cursor-pointer transition"
               title="Ganti teks potongan kertas antara tema Creative Watchlist dan Human Resources"
             >
@@ -192,7 +228,7 @@
               <!-- 3 boxes 24x24px, #F5E216, border 1.5px solid #4A2E1B, staggered rotations (-6deg, -4deg, -8deg) -->
               <div class="inline-flex items-center gap-2" title="Retro Window Controls (Klik untuk mengatur tampilan kolase)">
                 <button
-                  onclick="retroControlAction('minimize')"
+                  data-action="retro" data-value="minimize"
                   class="retro-control-box"
                   style="transform: rotate(-6deg);"
                   aria-label="Minimize Collage"
@@ -202,7 +238,7 @@
                   </svg>
                 </button>
                 <button
-                  onclick="retroControlAction('maximize')"
+                  data-action="retro" data-value="maximize"
                   class="retro-control-box"
                   style="transform: rotate(-4deg);"
                   aria-label="Maximize Collage"
@@ -212,7 +248,7 @@
                   </svg>
                 </button>
                 <button
-                  onclick="retroControlAction('close')"
+                  data-action="retro" data-value="close"
                   class="retro-control-box"
                   style="transform: rotate(-8deg);"
                   aria-label="Shuffle Collage"
@@ -238,7 +274,7 @@
               <div class="flex items-center gap-2">
                 <div
                   id="hero-tactile-switch"
-                  onclick="toggleXrayDeskMode()"
+                  data-action="toggle-xray"
                   style="transform: rotate(12deg);"
                   class="tactile-switch-track"
                   role="switch"
@@ -290,7 +326,7 @@
 
                 <!-- YouTube Glossy Play Badge (88x62px, #EE1D24, radius 16px, rotation +6deg) -->
                 <button
-                  onclick="openWatchlistModal('olaf')"
+                  data-action="open-modal" data-value="olaf"
                   style="transform: rotate(6deg);"
                   class="yt-glossy-badge group"
                   title="Putar Studi Kasus Kepemimpinan OLAF 2026 (49 Panitia Lintas 7 Divisi)"
@@ -337,7 +373,7 @@
             <!-- MINI YOUTUBE VIDEO POLAROID CARD (design.md section 3) -->
             <!-- White frame #FAFAFA, padding 8px 8px 14px 8px, rotation +11deg, split-screen thumbnail, "Perfect Imperfection", red progress bar, 08:42 -->
             <div
-              onclick="openWatchlistModal('olaf')"
+              data-action="open-modal" data-value="olaf"
               style="transform: rotate(11deg);"
               class="polaroid-yt-card w-72 sm:w-80 cursor-pointer relative draggable-cutout group"
               title="Klik untuk membuka rincian eksekusi OLAF 2026"
@@ -393,7 +429,7 @@
                   <p class="font-extrabold text-sm text-[#5C3A21] leading-tight">"Perfect Imperfection" — OLAF 2026</p>
                   <p class="font-mono text-[10px] text-[#5C3A21]/75 mt-0.5">Ketua Pelaksana • Right Person, Right Place</p>
                 </div>
-                <span class="font-mono text-[10px] bg-[#F5E216] text-[#5C3A21] font-bold px-1.5 py-0.5">HD</span>
+                <span class="font-mono text-[10px] bg-[#F5E216] text-[#5C3A21] font-bold px-1.5 py-0.5">STUDI KASUS</span>
               </div>
             </div>
 
@@ -468,7 +504,7 @@
 
           <!-- Physical Desk Object: Tactile Wireless Mouse (#E4E6E9) -->
           <div
-            onclick="playKeyClick()"
+            data-action="click-sound"
             title="Objek Meja: Wireless Studio Mouse (Klik untuk efek suara klik)"
             style="transform: rotate(-14deg); background: var(--bg-surface-metal); box-shadow: var(--shadow-object);"
             class="w-16 h-24 rounded-full border-2 border-[#C5C9CE] flex flex-col items-center pt-3 cursor-pointer hover:scale-105 transition select-none shrink-0"
@@ -572,28 +608,28 @@
         <!-- Tactile Filter Buttons -->
         <div class="flex flex-wrap items-center gap-2 font-mono text-xs font-bold" role="tablist">
           <button
-            onclick="filterScrapbookExp('all')"
+            data-action="filter-exp" data-value="all"
             data-filter="all"
             class="scrap-filter-btn paper-cutout-yellow px-4 py-2 transform -rotate-1 cursor-pointer transition"
           >
             ★ SEMUA (6)
           </button>
           <button
-            onclick="filterScrapbookExp('hr-lead')"
+            data-action="filter-exp" data-value="hr-lead"
             data-filter="hr-lead"
             class="scrap-filter-btn paper-cutout-white px-3.5 py-2 transform rotate-1 cursor-pointer transition"
           >
             TOP LEADERSHIP &amp; HR (3)
           </button>
           <button
-            onclick="filterScrapbookExp('event')"
+            data-action="filter-exp" data-value="event"
             data-filter="event"
             class="scrap-filter-btn paper-cutout-white px-3.5 py-2 transform -rotate-1 cursor-pointer transition"
           >
             MANAJEMEN ACARA (2)
           </button>
           <button
-            onclick="filterScrapbookExp('admin')"
+            data-action="filter-exp" data-value="admin"
             data-filter="admin"
             class="scrap-filter-btn paper-cutout-white px-3.5 py-2 transform rotate-2 cursor-pointer transition"
           >
@@ -637,7 +673,7 @@
 
           <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/30 flex items-center justify-between font-mono text-[11px] font-bold">
             <span>KOMPETENSI: RIGHT PERSON, RIGHT PLACE • 1-ON-1</span>
-            <button onclick="openWatchlistModal('olaf')" class="text-[#EE1D24] underline cursor-pointer">▶ Tonton Studi Kasus</button>
+            <button data-action="open-modal" data-value="olaf" class="text-[#EE1D24] underline cursor-pointer">▶ Tonton Studi Kasus</button>
           </div>
         </article>
 
@@ -703,7 +739,7 @@
 
           <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/40 flex items-center justify-between font-mono text-[11px] font-bold">
             <span>KOMPETENSI: TALENT RECRUITMENT • INTERNAL BONDING</span>
-            <button onclick="openWatchlistModal('peace')" class="text-[#5C3A21] underline cursor-pointer">▶ Detail</button>
+            <button data-action="open-modal" data-value="peace" class="text-[#5C3A21] underline cursor-pointer">▶ Detail</button>
           </div>
         </article>
 
@@ -951,7 +987,7 @@
                 </a>
               </div>
               <button
-                onclick="copyTextToClipboard('mrfahrezy18@gmail.com')"
+                data-action="copy" data-value="mrfahrezy18@gmail.com"
                 class="paper-cutout-yellow px-3 py-1.5 font-mono text-xs font-bold hover:brightness-95 cursor-pointer shrink-0"
               >
                 Salin
@@ -967,7 +1003,7 @@
                 </a>
               </div>
               <button
-                onclick="copyTextToClipboard('+62 855-9139-4965')"
+                data-action="copy" data-value="+62 855-9139-4965"
                 class="paper-cutout-brown px-3 py-1.5 font-mono text-xs font-bold text-white hover:brightness-110 cursor-pointer shrink-0"
               >
                 Salin
@@ -999,7 +1035,7 @@
   <div
     id="watchlist-modal"
     class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-xs flex items-center justify-center p-4"
-    onclick="if(event.target === this) closeWatchlistModal()"
+    data-action="close-modal-backdrop"
   >
     <div style="transform: rotate(-1deg);" class="polaroid-yt-card max-w-xl w-full p-5 sm:p-6 relative border-4 border-[#FAFAFA]">
       <!-- Modal Top Controls -->
@@ -1009,7 +1045,7 @@
           <span id="modal-badge-title" class="font-mono text-xs font-bold text-[#5C3A21]">HR WATCHLIST // STUDI KASUS OLAF 2026</span>
         </div>
         <button
-          onclick="closeWatchlistModal()"
+          data-action="close-modal"
           class="retro-control-box"
           title="Tutup Jendela"
         >
@@ -1043,14 +1079,14 @@
       <!-- Modal Episode Switcher -->
       <div class="mt-4 flex flex-wrap items-center justify-between gap-2">
         <div class="flex gap-2 font-mono text-xs font-bold">
-          <button onclick="openWatchlistModal('olaf')" class="paper-cutout-yellow px-3 py-1.5 cursor-pointer">
+          <button data-action="open-modal" data-value="olaf" class="paper-cutout-yellow px-3 py-1.5 cursor-pointer">
             1. OLAF 2026 (49 Panitia)
           </button>
-          <button onclick="openWatchlistModal('peace')" class="paper-cutout-brown text-white px-3 py-1.5 cursor-pointer">
+          <button data-action="open-modal" data-value="peace" class="paper-cutout-brown text-white px-3 py-1.5 cursor-pointer">
             2. PEACE 2026 (+10% Rekrutmen)
           </button>
         </div>
-        <button onclick="closeWatchlistModal()" class="font-mono text-xs font-bold text-[#5C3A21] underline cursor-pointer px-2 py-1">
+        <button data-action="close-modal" class="font-mono text-xs font-bold text-[#5C3A21] underline cursor-pointer px-2 py-1">
           Tutup [ESC]
         </button>
       </div>
