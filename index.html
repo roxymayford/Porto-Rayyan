@@ -2,12 +2,14 @@
 <html lang="id" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Muhammad Rayan Fahrezy — Creative HR &amp; Organizational Comm. Scrapbook Portfolio</title>
   <meta name="description" content="Portofolio Muhammad Rayan Fahrezy — Mahasiswa Ilmu Komunikasi Universitas Telkom, berfokus pada Human Resources (HR), Kepemimpinan Organisasi, dan Komunikasi Korporat." />
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="canonical" href="%VITE_SITE_URL%/" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <style>body{background-color:#2A5537;color:#111827}.hidden{display:none}</style>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
@@ -45,12 +47,12 @@
   <!-- =================================================================== -->
   <!-- CUTTING MAT PRECISION RULER TOP & SIDE MARKINGS                     -->
   <!-- =================================================================== -->
-  <div class="fixed top-0 left-0 right-0 h-6 bg-[#2A5537]/90 backdrop-blur-xs border-b border-white/30 z-40 flex items-center justify-between px-16 font-mono text-[10px] text-white/75 select-none pointer-events-none ruler-top">
-    <span>00 cm // MAT-A1 SELF-HEALING SURFACE</span>
+  <div aria-hidden="true" class="fixed top-0 left-0 right-0 h-6 bg-[#2A5537]/90 backdrop-blur-xs border-b border-white/30 z-40 flex items-center justify-between px-4 sm:px-16 font-mono text-[10px] text-white/75 select-none pointer-events-none ruler-top whitespace-nowrap overflow-hidden">
+    <span class="truncate">00 cm // MAT-A1 SELF-HEALING SURFACE</span>
     <span class="hidden sm:inline">10 cm</span>
     <span class="hidden md:inline">20 cm — FKS TELKOM UNIVERSITY</span>
     <span class="hidden lg:inline">30 cm — HR &amp; ORG. COMM STUDIO</span>
-    <span id="live-grid-coords">GRID X:048 Y:048</span>
+    <span id="live-grid-coords" class="shrink-0 ml-3">GRID X:048 Y:048</span>
   </div>
 
   <!-- =================================================================== -->
@@ -58,14 +60,14 @@
   <!-- 1. Top-Left Back / Studio Index Squircle (48x48px, #FFFFFF, 16px)   -->
   <!-- 2. Bottom-Right Zoom Pill (rgba(255,255,255,0.78), blur(8px), 1000) -->
   <!-- =================================================================== -->
-  <div class="fixed top-9 left-4 sm:left-6 z-50 flex items-center gap-2.5">
+  <div style="top: calc(2.25rem + var(--safe-t));" class="fixed left-4 sm:left-6 z-50 flex items-start gap-2.5">
     <button
       id="floating-back-btn" aria-expanded="false" aria-controls="quick-jump-menu"
       data-action="toggle-menu"
       title="Studio Desk Navigation & Reset Collage"
       aria-label="Navigasi Meja Kerja & Reset Kolase"
       style="width: 48px; height: 48px; background: #FFFFFF; border-radius: 16px; box-shadow: var(--shadow-object);"
-      class="flex items-center justify-center text-[#111827] hover:scale-105 active:scale-95 transition cursor-pointer"
+      class="flex items-center justify-center text-[#111827] hover:scale-105 active:scale-95 transition cursor-pointer shrink-0"
     >
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
         <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -73,7 +75,7 @@
     </button>
 
     <!-- Quick Jump Popover Menu -->
-    <div id="quick-jump-menu" class="hidden paper-cutout-white p-2.5 shadow-2xl border-2 border-[#4A2E1B] font-mono text-xs space-y-1 min-w-[215px]">
+    <div id="quick-jump-menu" class="hidden paper-cutout-white p-2.5 shadow-2xl border-2 border-[#4A2E1B] font-mono text-xs space-y-1 min-w-[200px] sm:min-w-[215px] max-w-[calc(100vw-5.5rem)]">
       <div class="px-2 py-1 bg-[#5C3A21] text-white font-bold flex items-center justify-between">
         <span>STUDIO DESK MAP</span>
         <span class="text-[#F5E216]">A1</span>
@@ -92,13 +94,13 @@
   </div>
 
   <!-- Bottom-Right Zoom Pill -->
-  <div class="fixed bottom-5 right-4 sm:right-6 z-50 flex items-center gap-2">
+  <div style="bottom: calc(1.25rem + var(--safe-b));" class="fixed right-4 sm:right-6 z-50 flex items-center gap-2">
     <button
       id="zoom-pill-btn"
       data-action="cycle-zoom"
       title="Klik untuk mengubah skala meja kerja (900 / 1000 / 1080)"
       style="background: rgba(255, 255, 255, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 9999px; box-shadow: var(--shadow-paper);"
-      class="px-4 py-2 flex items-center gap-2 text-[#111827] font-mono text-xs font-bold hover:bg-white transition cursor-pointer border border-white/60"
+      class="px-4 py-2 flex items-center gap-2 text-[#111827] font-mono text-xs font-bold hover:bg-white transition cursor-pointer border border-white/60 tap-target"
     >
       <svg class="w-3.5 h-3.5 text-[#5C3A21]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 3 21 3 21 9"></polyline>
@@ -131,7 +133,7 @@
   <!-- =================================================================== -->
   <!-- MAIN DESKTOP INTERACTIVE CANVAS (Max-Width 1200px / Mobile 480px)   -->
   <!-- =================================================================== -->
-  <main id="studio-canvas" class="relative z-10 max-w-[480px] md:max-w-[1200px] mx-auto px-4 sm:px-8 pt-10 pb-28 transition-transform duration-300 origin-top">
+  <main id="studio-canvas" class="relative z-10 max-w-[480px] sm:max-w-[640px] md:max-w-[1200px] mx-auto px-4 sm:px-8 pt-24 sm:pt-20 lg:pt-10 pb-28 transition-transform duration-300 origin-top">
 
     <!-- ================================================================= -->
     <!-- PHYSICAL STUDIO OBJECT 1: TOP MECHANICAL KEYBOARD NAV DOCK        -->
@@ -139,7 +141,7 @@
     <div class="mb-10 flex flex-col lg:flex-row items-center justify-between gap-6">
       <!-- Mechanical Keyboard Strip (#E4E6E9 Frame + Tactile Keycaps) -->
       <div class="mech-frame p-2.5 rounded-xl inline-flex flex-wrap items-center gap-1.5 sm:gap-2 transform -rotate-1">
-        <div class="px-2 py-1 font-mono text-[10px] font-bold text-[#5C3A21] flex items-center gap-1.5 border-r border-[#5C3A21]/20 mr-1">
+        <div class="w-full sm:w-auto pb-1 sm:pb-0 mb-0.5 sm:mb-0 border-b sm:border-b-0 sm:border-r border-[#5C3A21]/20 px-2 py-1 font-mono text-[10px] font-bold text-[#5C3A21] flex items-center gap-1.5 sm:mr-1">
           <span class="w-2 h-2 rounded-full bg-[#EE1D24] animate-pulse"></span>
           <span>MRF-65% STUDIO KBD</span>
         </div>
@@ -171,13 +173,13 @@
       </div>
 
       <!-- Right Studio Desk Status & Audio/Crop-Mark Helper -->
-      <div class="flex items-center gap-3">
+      <div id="desk-drag-helper" class="flex flex-wrap items-center justify-center gap-3">
         <span class="font-mono text-[11px] bg-[#5C3A21] text-[#FFFFFF] px-3 py-1.5 shadow-md transform rotate-1">
           GESER STIKER &amp; KERTAS DI ATAS ALAS POTONG ✂️
         </span>
         <button
           data-action="reset-desk"
-          class="paper-cutout-yellow px-3 py-1.5 font-mono text-xs font-bold hover:brightness-105 active:translate-y-0.5 transition cursor-pointer transform -rotate-2"
+          class="paper-cutout-yellow px-3 py-1.5 font-mono text-xs font-bold hover:brightness-105 active:translate-y-0.5 transition cursor-pointer transform -rotate-2 tap-target"
         >
           ↺ Reset Meja
         </button>
@@ -188,7 +190,7 @@
     <!-- SECTION 1: CENTRAL CUTTING-MAT COLLAGE CLUSTER (HERO)             -->
     <!-- Implements Exact Component Specifications from design.md          -->
     <!-- ================================================================= -->
-    <section id="collage-hero" class="relative py-6 sm:py-10">
+    <section id="collage-hero" class="relative py-6 sm:py-10 scroll-mt-3 sm:scroll-mt-4">
 
       <!-- Dashed Cutting Guide Frame Around Central Collage -->
       <div class="crop-mark-box relative p-5 sm:p-10 md:p-14 rounded-none">
@@ -202,13 +204,13 @@
         <!-- Top Metadata Coordinate Strip inside Cutting Zone -->
         <div class="flex flex-wrap items-center justify-between gap-2 mb-8 font-mono text-xs text-white/90">
           <div class="flex items-center gap-2">
-            <span class="inline-block w-2.5 h-2.5 bg-[#F5E216]"></span>
+            <span class="inline-block w-2.5 h-2.5 bg-[#F5E216] shrink-0"></span>
             <span>CUT-ZONE // A1-01: MUHAMMAD RAYAN FAHREZY (CV 2026)</span>
           </div>
           <div class="flex items-center gap-3">
             <button
               data-action="cycle-headline"
-              class="px-2.5 py-1 bg-white/15 hover:bg-white/25 border border-white/40 text-[11px] font-mono rounded-xs cursor-pointer transition"
+              class="px-2.5 py-1 bg-white/15 hover:bg-white/25 border border-white/40 text-[11px] font-mono rounded-xs cursor-pointer transition tap-target"
               title="Ganti teks potongan kertas antara tema Creative Watchlist dan Human Resources"
             >
               ⇄ Mode Teks: <span id="headline-mode-label" class="text-[#F5E216] font-bold">HR + Creative Collage</span>
@@ -223,13 +225,13 @@
           <div class="lg:col-span-7 relative flex flex-col items-center lg:items-start py-4">
 
             <!-- Top Row: Retro Window Control Trio + Tactile 3D Toggle Switch -->
-            <div class="flex items-center gap-6 mb-4 z-20">
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 mb-4 z-20">
               <!-- Retro Window Control Trio (Minimize, Maximize, Close) -->
               <!-- 3 boxes 24x24px, #F5E216, border 1.5px solid #4A2E1B, staggered rotations (-6deg, -4deg, -8deg) -->
               <div class="inline-flex items-center gap-2" title="Retro Window Controls (Klik untuk mengatur tampilan kolase)">
                 <button
                   data-action="retro" data-value="minimize"
-                  class="retro-control-box"
+                  class="retro-control-box tap-target"
                   style="transform: rotate(-6deg);"
                   aria-label="Minimize Collage"
                 >
@@ -239,7 +241,7 @@
                 </button>
                 <button
                   data-action="retro" data-value="maximize"
-                  class="retro-control-box"
+                  class="retro-control-box tap-target"
                   style="transform: rotate(-4deg);"
                   aria-label="Maximize Collage"
                 >
@@ -249,7 +251,7 @@
                 </button>
                 <button
                   data-action="retro" data-value="close"
-                  class="retro-control-box"
+                  class="retro-control-box tap-target"
                   style="transform: rotate(-8deg);"
                   aria-label="Shuffle Collage"
                 >
@@ -265,7 +267,7 @@
               <a
                 href="mailto:mrfahrezy18@gmail.com"
                 style="background: #F5E216; color: #5C3A21; font-weight: 700; font-size: 14px; padding: 3px 10px; transform: rotate(0deg); box-shadow: var(--shadow-paper);"
-                class="font-mono inline-flex items-center gap-1.5 hover:scale-105 transition"
+                class="font-mono inline-flex items-center gap-1.5 hover:scale-105 transition tap-target"
               >
                 <span>@mrfahrezy18</span>
               </a>
@@ -276,7 +278,7 @@
                   id="hero-tactile-switch"
                   data-action="toggle-xray"
                   style="transform: rotate(12deg);"
-                  class="tactile-switch-track"
+                  class="tactile-switch-track tap-target"
                   role="switch"
                   aria-checked="false"
                   tabindex="0"
@@ -295,7 +297,7 @@
               <div
                 id="cutout-block-1"
                 style="padding: 14px 28px; transform: rotate(-10deg);"
-                class="paper-cutout-brown heading-cutout text-5xl sm:text-7xl md:text-[78px] relative z-20 draggable-cutout"
+                class="paper-cutout-brown heading-cutout hero-cutout-fluid sm:text-7xl md:text-[78px] relative z-20 draggable-cutout"
               >
                 <span id="cutout-text-1">Creative</span>
 
@@ -312,12 +314,12 @@
               </div>
 
               <!-- Middle Row: VARIANT YELLOW ("block" / "Resources") + YOUTUBE GLOSSY PLAY BADGE -->
-              <div class="flex flex-wrap items-center gap-4 -mt-3 sm:-mt-4 ml-4 sm:ml-10 z-30">
+              <div class="flex flex-nowrap sm:flex-wrap items-center gap-2.5 sm:gap-4 -mt-3 sm:-mt-4 ml-0 sm:ml-10 z-30">
                 <!-- Variant Yellow ("block"): #F5E216, text #5C3A21, padding 12px 26px, rotation 0deg, dashed cut line at bottom-left corner -->
                 <div
                   id="cutout-block-2"
                   style="padding: 12px 26px; transform: rotate(0deg);"
-                  class="paper-cutout-yellow heading-cutout text-5xl sm:text-7xl md:text-[74px] relative draggable-cutout"
+                  class="paper-cutout-yellow heading-cutout hero-cutout-fluid sm:text-7xl md:text-[74px] relative draggable-cutout whitespace-nowrap"
                 >
                   <span id="cutout-text-2">HR block</span>
                   <!-- Dashed Cut Line at Bottom-Left Corner (design.md spec) -->
@@ -334,7 +336,7 @@
                   title="Putar Studi Kasus Kepemimpinan OLAF 2026 (49 Panitia Lintas 7 Divisi)"
                   aria-label="Buka Video Case Study OLAF 2026"
                 >
-                  <svg class="w-8 h-8 text-white ml-1 drop-shadow group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                  <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white ml-1 drop-shadow group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor">
                     <polygon points="6 4 20 12 6 20 6 4"></polygon>
                   </svg>
                 </button>
@@ -344,7 +346,7 @@
               <div
                 id="cutout-block-3"
                 style="padding: 12px 28px; transform: rotate(4deg);"
-                class="paper-cutout-white heading-cutout text-5xl sm:text-7xl md:text-[76px] -mt-3 sm:-mt-4 ml-2 sm:ml-6 z-20 relative draggable-cutout"
+                class="paper-cutout-white heading-cutout hero-cutout-fluid sm:text-7xl md:text-[76px] -mt-3 sm:-mt-4 ml-2 sm:ml-6 z-20 relative draggable-cutout"
               >
                 <span id="cutout-text-3">watchlist</span>
                 <!-- Hand-drawn Cursor Arrow Highlight (#F5E216) -->
@@ -377,7 +379,7 @@
             <div
               data-action="open-modal" data-value="olaf"
               style="transform: rotate(11deg);"
-              class="polaroid-yt-card w-72 sm:w-80 cursor-pointer relative draggable-cutout group"
+              class="polaroid-yt-card w-64 xs:w-72 sm:w-80 cursor-pointer relative draggable-cutout group"
               title="Klik untuk membuka rincian eksekusi OLAF 2026"
             >
               <!-- Top Washi Tape holding Polaroid -->
@@ -438,7 +440,7 @@
             <!-- DIE-CUT STICKER ID CARD (Representing Rayan's CV Photo with Black FKS Shirt & Red Lanyard) -->
             <div
               style="transform: rotate(-7deg);"
-              class="die-cut-sticker bg-[#FAFAFA] text-[#5C3A21] p-3.5 w-64 sm:w-72 relative draggable-cutout"
+              class="die-cut-sticker bg-[#FAFAFA] text-[#5C3A21] p-3.5 w-60 xs:w-64 sm:w-72 relative draggable-cutout"
             >
               <!-- Red Lanyard Clip at Top -->
               <div class="absolute -top-6 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none">
@@ -547,7 +549,7 @@
           <div class="washi-tape w-28 h-6 absolute -top-3 left-8 transform -rotate-3"></div>
 
           <div class="space-y-4">
-            <div class="flex items-center justify-between border-b-2 border-[#5C3A21] pb-2">
+            <div class="flex flex-wrap items-center justify-between gap-1.5 border-b-2 border-[#5C3A21] pb-2">
               <span class="font-mono text-xs font-bold bg-[#5C3A21] text-white px-2.5 py-0.5">RINGKASAN PROFIL</span>
               <span class="font-mono text-xs font-bold text-[#5C3A21]">ILMU KOMUNIKASI • TEL-U</span>
             </div>
@@ -572,7 +574,7 @@
           <div class="washi-tape w-28 h-6 absolute -top-3 right-10 transform rotate-3"></div>
 
           <div class="space-y-4">
-            <div class="flex items-center justify-between border-b-2 border-[#F5E216] pb-2">
+            <div class="flex flex-wrap items-center justify-between gap-1.5 border-b-2 border-[#F5E216] pb-2">
               <span class="font-mono text-xs font-bold bg-[#F5E216] text-[#5C3A21] px-2.5 py-0.5">TUJUAN KARIR (HUMAN RESOURCES)</span>
               <span class="font-mono text-xs font-bold text-[#F5E216]">SDM &amp; AUDIT KOMUNIKASI</span>
             </div>
@@ -608,10 +610,12 @@
         </div>
 
         <!-- Tactile Filter Buttons -->
-        <div class="flex flex-wrap items-center gap-2 font-mono text-xs font-bold" role="tablist">
+        <div class="flex flex-wrap items-center gap-2 font-mono text-xs font-bold" role="tablist" aria-label="Filter Kategori Pengalaman">
           <button
             data-action="filter-exp" data-value="all"
             data-filter="all"
+            role="tab"
+            aria-selected="true"
             class="scrap-filter-btn paper-cutout-yellow px-4 py-2 transform -rotate-1 cursor-pointer transition"
           >
             ★ SEMUA (6)
@@ -619,6 +623,8 @@
           <button
             data-action="filter-exp" data-value="hr-lead"
             data-filter="hr-lead"
+            role="tab"
+            aria-selected="false"
             class="scrap-filter-btn paper-cutout-white px-3.5 py-2 transform rotate-1 cursor-pointer transition"
           >
             TOP LEADERSHIP &amp; HR (3)
@@ -626,6 +632,8 @@
           <button
             data-action="filter-exp" data-value="event"
             data-filter="event"
+            role="tab"
+            aria-selected="false"
             class="scrap-filter-btn paper-cutout-white px-3.5 py-2 transform -rotate-1 cursor-pointer transition"
           >
             MANAJEMEN ACARA (2)
@@ -633,6 +641,8 @@
           <button
             data-action="filter-exp" data-value="admin"
             data-filter="admin"
+            role="tab"
+            aria-selected="false"
             class="scrap-filter-btn paper-cutout-white px-3.5 py-2 transform rotate-2 cursor-pointer transition"
           >
             SEKRETARIAT (1)
@@ -673,9 +683,9 @@
             </ul>
           </div>
 
-          <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/30 flex items-center justify-between font-mono text-[11px] font-bold">
+          <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/30 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] font-bold">
             <span>KOMPETENSI: RIGHT PERSON, RIGHT PLACE • 1-ON-1</span>
-            <button data-action="open-modal" data-value="olaf" class="text-[#EE1D24] underline cursor-pointer">▶ Tonton Studi Kasus</button>
+            <button data-action="open-modal" data-value="olaf" class="text-[#EE1D24] underline cursor-pointer tap-target">▶ Tonton Studi Kasus</button>
           </div>
         </article>
 
@@ -705,7 +715,7 @@
             </ul>
           </div>
 
-          <div class="mt-5 pt-3 border-t border-dashed border-white/30 flex items-center justify-between font-mono text-[11px] font-bold text-[#F5E216]">
+          <div class="mt-5 pt-3 border-t border-dashed border-white/30 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] font-bold text-[#F5E216]">
             <span>KOMPETENSI: APPRECIATION NIGHT • INTERNAL HARMONY</span>
             <span>FKS TEL-U</span>
           </div>
@@ -739,9 +749,9 @@
             </ul>
           </div>
 
-          <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/40 flex items-center justify-between font-mono text-[11px] font-bold">
+          <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/40 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] font-bold">
             <span>KOMPETENSI: TALENT RECRUITMENT • INTERNAL BONDING</span>
-            <button data-action="open-modal" data-value="peace" class="text-[#5C3A21] underline cursor-pointer">▶ Detail</button>
+            <button data-action="open-modal" data-value="peace" class="text-[#5C3A21] underline cursor-pointer tap-target">▶ Detail</button>
           </div>
         </article>
 
@@ -773,7 +783,7 @@
             </ul>
           </div>
 
-          <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/30 flex items-center justify-between font-mono text-[11px] font-bold">
+          <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/30 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] font-bold">
             <span>KOMPETENSI: MANAJEMEN ACARA • KOORDINASI TIM</span>
             <span>2025</span>
           </div>
@@ -806,7 +816,7 @@
             </ul>
           </div>
 
-          <div class="mt-5 pt-3 border-t border-dashed border-white/30 flex items-center justify-between font-mono text-[11px] font-bold text-[#F5E216]">
+          <div class="mt-5 pt-3 border-t border-dashed border-white/30 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] font-bold text-[#F5E216]">
             <span>KOMPETENSI: PENJADWALAN • KOORDINASI LINTAS DIVISI</span>
             <span>KARAWANG</span>
           </div>
@@ -839,7 +849,7 @@
             </ul>
           </div>
 
-          <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/30 flex items-center justify-between font-mono text-[11px] font-bold">
+          <div class="mt-5 pt-3 border-t border-dashed border-[#5C3A21]/30 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] font-bold">
             <span>KOMPETENSI: NOTULENSI RAPAT • ARSIP ORGANISASI</span>
             <span>2021–2023</span>
           </div>
@@ -867,7 +877,7 @@
 
           <!-- Universitas Telkom Cutout Card -->
           <div style="transform: rotate(-1deg);" class="paper-cutout-white p-6 relative">
-            <div class="flex items-center justify-between font-mono text-xs font-bold mb-2">
+            <div class="flex flex-wrap items-center justify-between gap-1.5 font-mono text-xs font-bold mb-2">
               <span class="bg-[#EE1D24] text-white px-2.5 py-0.5">2024 — SEKARANG</span>
               <span class="text-[#5C3A21]">BANDUNG</span>
             </div>
@@ -880,7 +890,7 @@
 
           <!-- SMAN 1 Telukjambe Cutout Card -->
           <div style="transform: rotate(1.5deg);" class="paper-cutout-yellow p-6 relative">
-            <div class="flex items-center justify-between font-mono text-xs font-bold mb-2">
+            <div class="flex flex-wrap items-center justify-between gap-1.5 font-mono text-xs font-bold mb-2">
               <span class="bg-[#5C3A21] text-white px-2.5 py-0.5">2021 — 2024</span>
               <span class="text-[#5C3A21]">KARAWANG</span>
             </div>
@@ -895,7 +905,7 @@
         <!-- RIGHT COLUMN (6 COLS): INFORMASI TAMBAHAN (KETERAMPILAN & BAHASA) -->
         <div class="lg:col-span-6 space-y-6">
           <div class="flex flex-wrap items-center gap-2">
-            <div class="paper-cutout-white px-4 py-2 heading-cutout text-3xl transform rotate-1">
+            <div class="paper-cutout-white px-4 py-2 heading-cutout text-2xl xs:text-3xl transform rotate-1">
               04 // INFORMASI TAMBAHAN
             </div>
             <div class="paper-cutout-brown px-3 py-1.5 font-mono text-xs font-bold text-[#F5E216] transform -rotate-2">
@@ -968,9 +978,9 @@
             </div>
 
             <div class="flex flex-wrap items-center gap-2">
-              <span class="paper-cutout-brown px-5 py-3 heading-cutout text-4xl sm:text-5xl transform -rotate-2">Mari</span>
-              <span class="paper-cutout-yellow px-5 py-3 heading-cutout text-4xl sm:text-5xl transform rotate-1">Berkolaborasi</span>
-              <span class="paper-cutout-white px-5 py-3 heading-cutout text-4xl sm:text-5xl transform -rotate-1">Bersama!</span>
+              <span class="paper-cutout-brown px-4 sm:px-5 py-2.5 sm:py-3 heading-cutout text-3xl xs:text-4xl sm:text-5xl transform -rotate-2">Mari</span>
+              <span class="paper-cutout-yellow px-4 sm:px-5 py-2.5 sm:py-3 heading-cutout text-3xl xs:text-4xl sm:text-5xl transform rotate-1">Berkolaborasi</span>
+              <span class="paper-cutout-white px-4 sm:px-5 py-2.5 sm:py-3 heading-cutout text-3xl xs:text-4xl sm:text-5xl transform -rotate-1">Bersama!</span>
             </div>
 
             <p class="text-white/95 text-base sm:text-lg max-w-xl font-medium pt-2">
@@ -982,7 +992,7 @@
           <div class="lg:col-span-5 space-y-4">
             <!-- Email Cutout -->
             <div style="transform: rotate(-1.5deg);" class="paper-cutout-white p-4 flex items-center justify-between gap-3">
-              <div>
+              <div class="min-w-0">
                 <span class="font-mono text-[10px] font-bold text-[#5C3A21]/70 block">EMAIL RESMI</span>
                 <a href="mailto:mrfahrezy18@gmail.com" class="font-mono text-sm sm:text-base font-bold text-[#5C3A21] hover:text-[#EE1D24] break-all">
                   mrfahrezy18@gmail.com
@@ -990,7 +1000,7 @@
               </div>
               <button
                 data-action="copy" data-value="mrfahrezy18@gmail.com"
-                class="paper-cutout-yellow px-3 py-1.5 font-mono text-xs font-bold hover:brightness-95 cursor-pointer shrink-0"
+                class="paper-cutout-yellow px-3 py-1.5 font-mono text-xs font-bold hover:brightness-95 cursor-pointer shrink-0 tap-target"
               >
                 Salin
               </button>
@@ -1006,7 +1016,7 @@
               </div>
               <button
                 data-action="copy" data-value="+62 855-9139-4965"
-                class="paper-cutout-brown px-3 py-1.5 font-mono text-xs font-bold text-white hover:brightness-110 cursor-pointer shrink-0"
+                class="paper-cutout-brown px-3 py-1.5 font-mono text-xs font-bold text-white hover:brightness-110 cursor-pointer shrink-0 tap-target"
               >
                 Salin
               </button>
@@ -1020,7 +1030,7 @@
                   Telukjambe Timur, Karawang • Bandung
                 </span>
               </div>
-              <span class="font-mono text-xs bg-[#F5E216] text-[#5C3A21] font-bold px-2 py-0.5">ID</span>
+              <span class="font-mono text-xs bg-[#F5E216] text-[#5C3A21] font-bold px-2 py-0.5 shrink-0">ID</span>
             </div>
           </div>
 
@@ -1036,23 +1046,24 @@
   <!-- =================================================================== -->
   <div
     id="watchlist-modal"
-    class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-xs flex items-center justify-center p-4"
+    class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto overscroll-contain"
     data-action="close-modal-backdrop"
     role="dialog"
     aria-modal="true"
     aria-labelledby="modal-Main-Heading"
   >
-    <div style="transform: rotate(-1deg);" class="polaroid-yt-card max-w-xl w-full p-5 sm:p-6 relative border-4 border-[#FAFAFA]">
+    <div style="transform: rotate(-1deg);" class="polaroid-yt-card max-w-xl w-full max-h-[calc(100dvh-2rem)] overflow-y-auto overscroll-contain p-5 sm:p-6 relative border-4 border-[#FAFAFA]">
       <!-- Modal Top Controls -->
-      <div class="flex items-center justify-between pb-3 mb-4 border-b-2 border-[#5C3A21]">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#EE1D24]"></span>
-          <span id="modal-badge-title" class="font-mono text-xs font-bold text-[#5C3A21]">HR WATCHLIST // STUDI KASUS OLAF 2026</span>
+      <div class="flex items-center justify-between gap-2 pb-3 mb-4 border-b-2 border-[#5C3A21]">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="w-3 h-3 rounded-full bg-[#EE1D24] shrink-0"></span>
+          <span id="modal-badge-title" class="font-mono text-xs font-bold text-[#5C3A21] truncate">HR WATCHLIST // STUDI KASUS OLAF 2026</span>
         </div>
         <button
           data-action="close-modal"
-          class="retro-control-box"
+          class="retro-control-box tap-target shrink-0"
           title="Tutup Jendela"
+          aria-label="Tutup Jendela"
         >
           ✕
         </button>
@@ -1060,7 +1071,7 @@
 
       <!-- Simulated Interactive Video Screen -->
       <div class="bg-[#5C3A21] text-white p-5 rounded-xs relative overflow-hidden space-y-3">
-        <div class="flex items-center justify-between font-mono text-xs text-[#F5E216]">
+        <div class="flex flex-wrap items-center justify-between gap-1 font-mono text-xs text-[#F5E216]">
           <span id="modal-episode-tag">EPISODE 01 • KETUA PELAKSANA OLAF 2026</span>
           <span>08:42 / 10:00</span>
         </div>
@@ -1083,7 +1094,7 @@
 
       <!-- Modal Episode Switcher -->
       <div class="mt-4 flex flex-wrap items-center justify-between gap-2">
-        <div class="flex gap-2 font-mono text-xs font-bold">
+        <div class="flex flex-wrap gap-2 font-mono text-xs font-bold">
           <button data-action="open-modal" data-value="olaf" class="paper-cutout-yellow px-3 py-1.5 cursor-pointer">
             1. OLAF 2026 (49 Panitia)
           </button>
@@ -1101,7 +1112,8 @@
   <!-- TOAST MESSAGE BOX (NO alert() USED) -->
   <div
     id="tactile-toast"
-    class="fixed bottom-16 left-1/2 -translate-x-1/2 z-50 hidden paper-cutout-yellow px-5 py-2.5 font-mono text-xs font-bold border-2 border-[#4A2E1B] shadow-2xl"
+    style="bottom: calc(4rem + var(--safe-b));"
+    class="fixed left-1/2 -translate-x-1/2 z-50 hidden paper-cutout-yellow px-5 py-2.5 font-mono text-xs font-bold border-2 border-[#4A2E1B] shadow-2xl max-w-[calc(100vw-2rem)] text-center"
   >
     Tersalin ke papan klip!
   </div>

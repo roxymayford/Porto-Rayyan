@@ -4,6 +4,9 @@ export default {
   content: ['./index.html', './src/**/*.{ts,js,html}'],
   theme: {
     extend: {
+      screens: {
+        xs: '380px'
+      },
       colors: {
         mat: {
           DEFAULT: '#346744',

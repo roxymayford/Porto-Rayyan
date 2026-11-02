@@ -31,6 +31,7 @@ export function openWatchlistModal(type: ModalKey | string = 'olaf', triggerEl?:
   const epTag = document.getElementById('modal-episode-tag');
   const heading = document.getElementById('modal-Main-Heading');
   const desc = document.getElementById('modal-description');
+  const mainCanvas = document.getElementById('studio-canvas');
 
   if (!modal) return;
 
@@ -43,11 +44,14 @@ export function openWatchlistModal(type: ModalKey | string = 'olaf', triggerEl?:
 
   if (triggerEl) {
     previousActiveElement = triggerEl;
-  } else if (document.activeElement instanceof HTMLElement) {
+  } else if (document.activeElement instanceof HTMLElement && !modal.contains(document.activeElement)) {
     previousActiveElement = document.activeElement;
   }
 
   modal.classList.remove('hidden');
+  if (mainCanvas) {
+    mainCanvas.setAttribute('inert', '');
+  }
 
   // Focus management: move focus into the close button or first focusable element
   const closeBtn = modal.querySelector<HTMLElement>('button[data-action="close-modal"]');
@@ -58,10 +62,14 @@ export function openWatchlistModal(type: ModalKey | string = 'olaf', triggerEl?:
 
 export function closeWatchlistModal(): void {
   const modal = document.getElementById('watchlist-modal');
+  const mainCanvas = document.getElementById('studio-canvas');
   if (!modal || modal.classList.contains('hidden')) return;
 
   playKeyClick(440);
   modal.classList.add('hidden');
+  if (mainCanvas) {
+    mainCanvas.removeAttribute('inert');
+  }
 
   // Restore focus to triggering element
   if (previousActiveElement && typeof previousActiveElement.focus === 'function') {

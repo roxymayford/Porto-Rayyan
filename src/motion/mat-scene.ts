@@ -12,9 +12,20 @@ import {
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+interface NetworkInformationLike {
+  saveData?: boolean;
+}
+
 export function initMatScene(): (() => void) | undefined {
   const cv = document.getElementById('mat-3d') as HTMLCanvasElement | null;
   if (!cv) return;
+
+  // Respect Data Saver mode on mobile devices
+  const nav = navigator as Navigator & { connection?: NetworkInformationLike };
+  if (nav.connection?.saveData) {
+    cv.remove();
+    return;
+  }
 
   let renderer: WebGLRenderer;
   try {
@@ -45,6 +56,7 @@ export function initMatScene(): (() => void) | undefined {
   let scraps: Mesh[] = [];
   let visH = 1;
   let span = 0;
+  let lastWidth = innerWidth;
 
   function build(intro: boolean): void {
     scraps.forEach((m) => scene.remove(m));
@@ -53,13 +65,19 @@ export function initMatScene(): (() => void) | undefined {
     const pages = Math.max(1, document.documentElement.scrollHeight / innerHeight);
     const visW = visH * cam.aspect;
     span = (pages - 1) * visH * 0.45;
-    const n = Math.min(60, Math.round((innerWidth < 768 ? 7 : 11) * pages));
+    const mobileViewport = innerWidth < 768;
+    const maxScraps = mobileViewport ? 28 : 60;
+    const density = mobileViewport ? 5 : 11;
+    const n = Math.min(maxScraps, Math.round(density * pages));
+
+    // Scale down 3D paper trimmings proportionally on narrower screens so they don't appear oversized
+    const sizeScale = mobileViewport ? Math.max(0.32, Math.min(0.55, innerWidth / 1050)) : 1;
 
     for (let i = 0; i < n; i++) {
       const mat = mats[Math.floor(Math.random() * mats.length)]!;
       const m = new Mesh(geo, mat);
-      const w = R(0.5, 1.5);
-      const h = R(0.4, 1.1);
+      const w = R(0.5, 1.5) * sizeScale;
+      const h = R(0.4, 1.1) * sizeScale;
       m.scale.set(w, h, 1);
       m.position.set(
         R(-0.55, 0.55) * visW,
@@ -83,21 +101,27 @@ export function initMatScene(): (() => void) | undefined {
     }
   }
 
-  function size(intro: boolean): void {
+  function size(intro: boolean, rebuildScene = true): void {
     renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
     renderer.setSize(innerWidth, innerHeight, false);
     cam.aspect = innerWidth / innerHeight;
     cam.updateProjectionMatrix();
     visH = 2 * Math.tan(MathUtils.degToRad(cam.fov / 2)) * cam.position.z;
-    build(intro);
+    if (rebuildScene) {
+      build(intro);
+    }
   }
 
-  size(true);
+  size(true, true);
 
   let rt: ReturnType<typeof setTimeout> | null = null;
   const onResize = () => {
     if (rt !== null) clearTimeout(rt);
-    rt = setTimeout(() => size(false), 200);
+    rt = setTimeout(() => {
+      const widthChanged = Math.abs(innerWidth - lastWidth) >= 2;
+      lastWidth = innerWidth;
+      size(false, widthChanged);
+    }, 200);
   };
   window.addEventListener('resize', onResize);
 

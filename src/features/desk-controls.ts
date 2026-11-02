@@ -26,7 +26,9 @@ export function cycleCanvasZoom(): void {
     counterEl.textContent = z.label;
   }
   if (canvasEl) {
-    canvasEl.style.transform = `scale(${z.scale})`;
+    const isNarrow = typeof window !== 'undefined' && window.innerWidth < 640;
+    const effectiveScale = isNarrow && z.scale > 1 ? 1 : z.scale;
+    canvasEl.style.transform = `scale(${effectiveScale})`;
   }
   showTactileToast(`Skala Kanvas Meja Potong: ${z.label}`);
 }
@@ -72,6 +74,7 @@ export function retroControlAction(action: RetroAction): void {
   const b1 = document.getElementById('cutout-block-1');
   const b2 = document.getElementById('cutout-block-2');
   const b3 = document.getElementById('cutout-block-3');
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
 
   if (action === 'minimize') {
     if (b1) b1.style.transform = 'rotate(-4deg) scale(0.92)';
@@ -79,11 +82,15 @@ export function retroControlAction(action: RetroAction): void {
     if (b3) b3.style.transform = 'rotate(2deg) scale(0.92)';
     showTactileToast('Kolase diperkecil sedikit (Minimize)');
   } else if (action === 'maximize') {
-    if (b1) b1.style.transform = 'rotate(-10deg) scale(1.04)';
-    if (b2) b2.style.transform = 'rotate(0deg) scale(1.04)';
-    if (b3) b3.style.transform = 'rotate(4deg) scale(1.04)';
+    const maxScale = isMobile ? 1.01 : 1.04;
+    if (b1) b1.style.transform = `rotate(-10deg) scale(${maxScale})`;
+    if (b2) b2.style.transform = `rotate(0deg) scale(${maxScale})`;
+    if (b3) b3.style.transform = `rotate(4deg) scale(${maxScale})`;
     showTactileToast('Kolase diperbesar (Maximize)');
   } else if (action === 'close') {
+    if (b1) b1.style.transform = 'rotate(-10deg)';
+    if (b2) b2.style.transform = 'rotate(0deg)';
+    if (b3) b3.style.transform = 'rotate(4deg)';
     resetDraggablePositions();
   }
 }

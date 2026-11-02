@@ -2,13 +2,19 @@ import gsap from 'gsap';
 import { pasteIn } from './paste-in';
 
 export function initHeroIntro(): gsap.core.Timeline {
+  const isSmall = typeof window !== 'undefined' && window.innerWidth < 640;
+  const dropY = isSmall ? -120 : -320;
+  const dropScale = isSmall ? 1.08 : 1.25;
+  const polaroidX = isSmall ? 32 : 160;
+  const stickerY = isSmall ? 60 : 120;
+
   const tl = gsap.timeline({ delay: 0.15 });
 
   tl.add(
     pasteIn('#cutout-block-1', {
-      y: -320,
-      rotation: '+=28',
-      scale: 1.25,
+      y: dropY,
+      rotation: isSmall ? '+=12' : '+=28',
+      scale: dropScale,
       opacity: 0,
       duration: 0.7,
       ease: 'back.out(1.3)',
@@ -16,9 +22,9 @@ export function initHeroIntro(): gsap.core.Timeline {
   )
     .add(
       pasteIn('#cutout-block-2', {
-        y: -320,
-        rotation: '-=20',
-        scale: 1.25,
+        y: dropY,
+        rotation: isSmall ? '-=10' : '-=20',
+        scale: dropScale,
         opacity: 0,
         duration: 0.7,
         ease: 'back.out(1.3)',
@@ -27,9 +33,9 @@ export function initHeroIntro(): gsap.core.Timeline {
     )
     .add(
       pasteIn('#cutout-block-3', {
-        y: -320,
-        rotation: '+=24',
-        scale: 1.25,
+        y: dropY,
+        rotation: isSmall ? '+=10' : '+=24',
+        scale: dropScale,
         opacity: 0,
         duration: 0.7,
         ease: 'back.out(1.3)',
@@ -47,9 +53,9 @@ export function initHeroIntro(): gsap.core.Timeline {
     )
     .add(
       pasteIn('#collage-hero .polaroid-yt-card', {
-        x: 160,
-        y: 40,
-        rotation: '+=16',
+        x: polaroidX,
+        y: isSmall ? 24 : 40,
+        rotation: isSmall ? '+=8' : '+=16',
         opacity: 0,
         duration: 0.7,
         ease: 'power3.out',
@@ -58,8 +64,8 @@ export function initHeroIntro(): gsap.core.Timeline {
     )
     .add(
       pasteIn('#collage-hero .die-cut-sticker', {
-        y: 120,
-        rotation: '-=14',
+        y: stickerY,
+        rotation: isSmall ? '-=8' : '-=14',
         opacity: 0,
         duration: 0.7,
         ease: 'power3.out',

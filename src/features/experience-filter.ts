@@ -20,7 +20,9 @@ export function filterScrapbookExp(cat: ExperienceCategory | string): void {
   const btns = document.querySelectorAll<HTMLElement>('.scrap-filter-btn');
 
   btns.forEach((btn) => {
-    if (btn.getAttribute('data-filter') === cat) {
+    const isActive = btn.getAttribute('data-filter') === cat;
+    btn.setAttribute('aria-selected', String(isActive));
+    if (isActive) {
       btn.classList.remove('paper-cutout-white');
       btn.classList.add('paper-cutout-yellow');
     } else {

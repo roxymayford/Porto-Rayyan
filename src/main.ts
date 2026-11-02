@@ -42,8 +42,9 @@ import {
 import { initHeroIntro } from './motion/hero-intro';
 import { initCardReveal } from './motion/card-reveal';
 
-// Register GSAP plugins
+// Register GSAP plugins and ignore mobile address-bar resize jumps
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 // Refresh ScrollTrigger when experience category changes
 setOnFilterChangeHook(() => {
@@ -112,10 +113,14 @@ const handlers: Record<Action, (el: HTMLElement, e: MouseEvent) => void> = {
   }
 };
 
-// Event delegation for all [data-action] elements
+// Event delegation for all [data-action] elements + outside click for quick jump menu
 document.addEventListener('click', (e: MouseEvent) => {
   const target = e.target as HTMLElement | null;
   if (!target) return;
+
+  if (!target.closest('#quick-jump-menu') && !target.closest('#floating-back-btn')) {
+    closeQuickJumpMenu();
+  }
 
   const actionEl = target.closest<HTMLElement>('[data-action]');
   if (!actionEl) return;
@@ -140,8 +145,29 @@ function loadMatScene(): void {
   }
 }
 
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+function focusHeroOnEntry(): void {
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+  const heroBox =
+    document.querySelector<HTMLElement>('#collage-hero .crop-mark-box') ??
+    document.getElementById('collage-hero');
+  if (!heroBox) return;
+
+  const targetY = Math.max(0, Math.round(heroBox.getBoundingClientRect().top + window.scrollY - 36));
+  window.scrollTo({ top: targetY, left: 0, behavior: 'instant' });
+  ScrollTrigger.refresh();
+}
+
 // Initialize features on DOM ready
 function init(): void {
+  focusHeroOnEntry();
+  window.addEventListener('load', focusHeroOnEntry, { once: true });
+
   initDraggableCollage();
   initGridCoordsTracker();
   initWatchlistModal();

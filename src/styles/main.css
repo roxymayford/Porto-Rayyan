@@ -24,6 +24,12 @@
   --shadow-paper: 0 8px 16px -2px rgba(14, 34, 19, 0.42), 0 2px 4px rgba(0, 0, 0, 0.25);
   --shadow-object: 0 16px 28px -4px rgba(10, 26, 14, 0.55), 0 4px 8px rgba(0, 0, 0, 0.35);
   --shadow-inset-switch: inset 0 2px 5px rgba(0, 0, 0, 0.22);
+
+  /* Safe-area Insets for Notched Mobile Viewports */
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
 }
 
 * {
@@ -36,6 +42,8 @@ body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   letter-spacing: -0.015em;
   line-height: 1.35;
+  min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
   /* Self-healing mat: fine 24px grid, heavier line every 5th (120px), anchored to the page so it scrolls with the content */
   background-image:
@@ -45,6 +53,12 @@ body {
     linear-gradient(to bottom, rgba(255,255,255,0.085) 1px, transparent 1px);
   background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
   background-position: 0 0;
+}
+
+@supports (overflow-x: clip) {
+  body {
+    overflow-x: clip;
+  }
 }
 
 /* Soft light pool + edge falloff (fixed to viewport, so it never stretches over a long page) */
@@ -74,6 +88,29 @@ body::after {
     font-weight: 800;
     letter-spacing: -0.035em;
     line-height: 0.95;
+  }
+
+  /* Fluid Hero Cutout Sizing ONLY on narrow phones (<640px) so design stays identical while fitting 320-430px */
+  @media (max-width: 639px) {
+    .hero-cutout-fluid {
+      font-size: clamp(2rem, 0.5rem + 7.5vw, 3.25rem);
+    }
+    #cutout-block-1 {
+      padding: 10px 18px !important;
+    }
+    #cutout-block-2 {
+      padding: 10px 16px !important;
+    }
+    #cutout-block-3 {
+      padding: 10px 18px !important;
+    }
+  }
+
+  /* On ultra-narrow 320-379px screens, slightly soften polaroid tilt so it doesn't clip off-screen */
+  @media (max-width: 379px) {
+    .polaroid-yt-card {
+      transform: rotate(6deg) !important;
+    }
   }
 
   /* Paper Cutout Sharp Scissor-Cut Edge (0px - 2px radius, NO border) */
@@ -121,10 +158,24 @@ body::after {
     justify-content: center;
     transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.15s ease;
     cursor: pointer;
+    position: relative;
   }
-  .retro-control-box:hover {
-    transform: translateY(-2px) scale(1.08) !important;
-    background-color: #fff04d;
+
+  /* Invisible touch hit-area expansion without altering visual design */
+  .tap-target {
+    position: relative;
+  }
+  .tap-target::after {
+    content: '';
+    position: absolute;
+    inset: -10px;
+  }
+
+  @media (hover: hover) {
+    .retro-control-box:hover {
+      transform: translateY(-2px) scale(1.08) !important;
+      background-color: #fff04d;
+    }
   }
 
   /* Dashed Cutting Guide / Crop Marks */
@@ -178,6 +229,14 @@ body::after {
     justify-content: center;
     cursor: pointer;
     transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    flex-shrink: 0;
+  }
+  @media (max-width: 639px) {
+    .yt-glossy-badge {
+      width: 72px;
+      height: 50px;
+      border-radius: 14px;
+    }
   }
   .yt-glossy-badge::before {
     content: '';
@@ -190,8 +249,10 @@ body::after {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.02) 100%);
     pointer-events: none;
   }
-  .yt-glossy-badge:hover {
-    transform: rotate(9deg) scale(1.08) !important;
+  @media (hover: hover) {
+    .yt-glossy-badge:hover {
+      transform: rotate(9deg) scale(1.08) !important;
+    }
   }
 
   /* Mini YouTube Video Polaroid Card (radius 6px, padding 8px 8px 14px 8px) */
@@ -203,8 +264,10 @@ body::after {
     box-shadow: var(--shadow-object);
     transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .polaroid-yt-card:hover {
-    z-index: 30;
+  @media (hover: hover) {
+    .polaroid-yt-card:hover {
+      z-index: 30;
+    }
   }
 
   /* Mechanical Keyboard Keycap Tactile Feel */
@@ -243,6 +306,8 @@ body::after {
   /* Draggable Interactive Item Cursor */
   .draggable-cutout {
     cursor: grab;
+    translate: 0px;
+    scale: 1;
   }
   .draggable-cutout:active {
     cursor: grabbing;
@@ -262,12 +327,21 @@ body::after {
 
   /* §7 item 2: hover:rotate-0 fix via CSS variable --r */
   .exp-scrap-card {
+    translate: 0px;
+    scale: 1;
     transform: rotate(var(--r, 0deg));
     transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .exp-scrap-card:hover {
-    --r: 0deg !important;
+  @media (hover: hover) {
+    .exp-scrap-card:hover {
+      --r: 0deg !important;
+    }
   }
+}
+
+/* Modal scroll containment */
+#watchlist-modal {
+  overscroll-behavior: contain;
 }
 
 /* Custom Scrollbar */

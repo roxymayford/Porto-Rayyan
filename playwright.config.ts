@@ -1,4 +1,30 @@
 import { defineConfig, devices } from '@playwright/test';
+import fs from 'node:fs';
+import path from 'node:path';
+
+function findBrowserExecutable(): string | undefined {
+  const linuxChrome = '/usr/local/bin/google-chrome';
+  if (fs.existsSync(linuxChrome)) return linuxChrome;
+
+  const localAppData = process.env.LOCALAPPDATA;
+  if (localAppData) {
+    const msPlaywright = path.join(localAppData, 'ms-playwright');
+    if (fs.existsSync(msPlaywright)) {
+      const dirs = fs
+        .readdirSync(msPlaywright)
+        .filter((d) => d.startsWith('chromium-'))
+        .sort()
+        .reverse();
+      for (const dir of dirs) {
+        const candidate = path.join(msPlaywright, dir, 'chrome-win64', 'chrome.exe');
+        if (fs.existsSync(candidate)) return candidate;
+      }
+    }
+  }
+  return undefined;
+}
+
+const executablePath = findBrowserExecutable();
 
 export default defineConfig({
   testDir: './tests/e2e',
@@ -20,8 +46,8 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        executablePath: '/usr/local/bin/google-chrome',
         launchOptions: {
+          ...(executablePath ? { executablePath } : {}),
           args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu'],
         },
       },
