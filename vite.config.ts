@@ -6,6 +6,7 @@ export default defineConfig({
     host: true,
   },
   build: {
+    chunkSizeWarningLimit: 700,
     rollupOptions: {
       output: {
         manualChunks(id: string) {

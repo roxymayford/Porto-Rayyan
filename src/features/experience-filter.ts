@@ -8,6 +8,8 @@ export function setOnFilterChangeHook(fn: () => void): void {
   onFilterChangeHook = fn;
 }
 
+export const registerFilterChangeCallback = setOnFilterChangeHook;
+
 export function filterScrapbookExp(cat: ExperienceCategory | string): void {
   playKeyClick(640);
   const cards = document.querySelectorAll<HTMLElement>('.exp-scrap-card');

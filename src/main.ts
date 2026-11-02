@@ -13,6 +13,10 @@ import '@fontsource/jetbrains-mono/500-italic.css';
 // Styles
 import './styles/main.css';
 
+// GSAP
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 // Lib & Features
 import { playKeyClick } from './lib/audio';
 import { initGridCoordsTracker } from './features/grid-coords';
@@ -27,12 +31,24 @@ import {
   type RetroAction
 } from './features/desk-controls';
 import { closeQuickJumpMenu, toggleQuickJumpMenu } from './features/quick-menu';
-import { filterScrapbookExp } from './features/experience-filter';
+import { filterScrapbookExp, setOnFilterChangeHook } from './features/experience-filter';
 import {
   closeWatchlistModal,
   initWatchlistModal,
   openWatchlistModal
 } from './features/watchlist-modal';
+
+// Motion
+import { initHeroIntro } from './motion/hero-intro';
+import { initCardReveal } from './motion/card-reveal';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
+
+// Refresh ScrollTrigger when experience category changes
+setOnFilterChangeHook(() => {
+  ScrollTrigger.refresh();
+});
 
 type Action =
   | 'toggle-menu'
@@ -110,12 +126,33 @@ document.addEventListener('click', (e: MouseEvent) => {
   }
 });
 
+function loadMatScene(): void {
+  const initScene = () => {
+    import('./motion/mat-scene')
+      .then((m) => m.initMatScene())
+      .catch((err) => console.error('Failed to load mat-scene:', err));
+  };
+
+  if ('requestIdleCallback' in window) {
+    (window as unknown as { requestIdleCallback: (cb: () => void) => void }).requestIdleCallback(initScene);
+  } else {
+    setTimeout(initScene, 200);
+  }
+}
+
 // Initialize features on DOM ready
 function init(): void {
   initDraggableCollage();
   initGridCoordsTracker();
   initWatchlistModal();
   initDeskControls();
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    initHeroIntro();
+    initCardReveal();
+  }
+  loadMatScene();
 }
 
 if (document.readyState === 'loading') {
