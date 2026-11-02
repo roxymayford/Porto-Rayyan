@@ -5,3 +5,5 @@ legacy
 tests/e2e/__baseline__
 *.md
 .github
+.agents
+.superpowers

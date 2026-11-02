@@ -4,3 +4,6 @@ dist
 .superpowers
 .DS_Store
 *.log
+tests/e2e/__current__
+test-results
+
